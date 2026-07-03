@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Discover Upavan Resort in Wayanad, Kerala - an ultra-luxury eco-resort nestled in misty rainforests. Experience Ayurvedic wellness, treetop dining, and premium forest villas.">
-  <meta name="keywords" content="luxury resort wayanad, nature resort kerala, eco luxury india, ayurdevic spa wayanad, upavan resort">
+  <meta name="keywords" content="luxury resort wayanad, nature resort kerala, eco luxury india, ayurvedic spa wayanad, upavan resort">
   <meta name="author" content="Upavan Resort">
   <title>Upavan Resort | Luxury Nature Sanctuary | Wayanad, Kerala</title>
   
@@ -12,6 +12,10 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+  <!-- Custom Luxury Mouse Cursor (Desktop Only) -->
+  <div class="custom-cursor-dot"></div>
+  <div class="custom-cursor-ring"></div>
 
   <!-- Floating Luxury Header -->
   <header>
@@ -28,7 +32,7 @@
         <a href="#nature" class="nav-link">Wayanad Wild</a>
         <a href="#gallery" class="nav-link">Gallery</a>
         <a href="#testimonials" class="nav-link">Reviews</a>
-        <a href="#booking" class="btn btn-outline btn-nav">Book Your Stay</a>
+        <a href="#booking" class="btn btn-outline btn-nav">Reserve</a>
       </nav>
 
       <!-- Hamburger Menu for Mobile -->
@@ -49,17 +53,17 @@
     <a href="#nature" class="nav-link">Wayanad Wild</a>
     <a href="#gallery" class="nav-link">Gallery</a>
     <a href="#testimonials" class="nav-link">Reviews</a>
-    <a href="#booking" class="btn btn-gold btn-nav">Book Your Stay</a>
+    <a href="#booking" class="btn btn-nav">Book Your Stay</a>
   </div>
 
   <!-- Hero Section -->
-  <section class="hero">
+  <section class="hero" id="hero">
     <div class="hero-bg"></div>
-    <div class="hero-content">
+    <div class="hero-content reveal-group">
       <span class="uppercase-track reveal">Wayanad, Kerala</span>
-      <h1 class="heading-primary reveal reveal-delay-1">Where Wilderness Meets Unrivaled Luxury</h1>
-      <p class="body-large reveal reveal-delay-2">Deep in the misty rainforests of Kerala, discover an eco-luxury sanctuary designed to realign your senses with the raw, tranquil rhythms of nature.</p>
-      <div class="hero-cta reveal reveal-delay-3">
+      <h1 class="heading-primary reveal">Where Wilderness Meets Unrivaled Luxury</h1>
+      <p class="body-large reveal">Deep in the misty rainforests of Kerala, discover an eco-luxury sanctuary designed to realign your senses with the raw, tranquil rhythms of nature.</p>
+      <div class="hero-cta reveal">
         <a href="#booking" class="btn btn-gold">Book Your Stay</a>
         <a href="#cottages" class="btn btn-outline">Explore Rooms</a>
       </div>
@@ -67,7 +71,7 @@
     
     <!-- Scroll Down Mouse Indicator -->
     <a href="#booking" class="scroll-indicator">
-      <span>Discover</span>
+      <span>Scroll</span>
       <div class="scroll-mouse">
         <div class="scroll-wheel"></div>
       </div>
@@ -121,39 +125,44 @@
   </div>
 
   <!-- Resort Introduction Section -->
-  <section class="intro section-spacing" id="about">
+  <section class="intro section-spacing bg-gradient-radial" id="about">
     <div class="container">
       <div class="intro-grid">
-        <div class="intro-text reveal">
-          <span class="uppercase-track text-gold">The Sanctuary of Kerala</span>
-          <h2 class="heading-secondary">A quiet refuge, <em>suspended</em> in the forest canopy.</h2>
-          <p class="body-large">Upavan is more than a resort; it is an architectural ode to Wayanad’s wilderness. Hidden amidst ancient teak trees and floating mountain mist, our cottages blend natural timbers with contemporary glass designs to offer absolute privacy.</p>
-          <p>Here, the morning begins with the calls of tropical hornbills and the scent of wild cardamom. Every detail, from our stone-walled wellness pools to our organic culinary program, has been curated to inspire a profound, elegant connection to the earth.</p>
+        <div class="intro-text reveal-group">
+          <span class="uppercase-track reveal">The Sanctuary of Kerala</span>
+          <h2 class="heading-secondary reveal">A quiet refuge, <em>suspended</em> in the forest canopy.</h2>
+          <p class="body-large reveal">Upavan is more than a resort; it is an architectural ode to Wayanad’s wilderness. Hidden amidst ancient teak trees and floating mountain mist, our cottages blend natural timbers with contemporary glass designs to offer absolute privacy.</p>
+          <p class="reveal">Here, the morning begins with the calls of tropical hornbills and the scent of wild cardamom. Every detail, from our stone-walled wellness pools to our organic culinary program, has been curated to inspire a profound, elegant connection to the earth.</p>
           
-          <div class="intro-signature">
+          <div class="intro-signature reveal">
             <div class="signature-line"></div>
             <span class="signature-name">Arjun Varma, Founder</span>
           </div>
         </div>
         
-        <div class="intro-images reveal reveal-delay-2">
-          <img src="images/villa_interior.png" alt="Luxury wood cottage bedroom facing green tropical jungle" class="img-large">
-          <img src="images/spa_wellness.png" alt="Ayurvedic spa room with stone walls" class="img-small">
+        <div class="intro-images reveal-group">
+          <img src="images/villa_interior.png" alt="Luxury wood cottage bedroom facing green tropical jungle" class="img-large reveal">
+          <img src="images/spa_wellness.png" alt="Ayurvedic spa room with stone walls" class="img-small reveal">
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Luxury Section Divider -->
+  <div class="luxury-divider">
+    <span class="luxury-divider-icon">✦</span>
+  </div>
+
   <!-- Featured Accommodation Section -->
   <section class="accommodation section-spacing" id="cottages">
     <div class="container">
-      <div class="accom-header reveal">
-        <span class="uppercase-track text-gold">Exclusive Stays</span>
-        <h2 class="heading-secondary">Our Private Sanctuaries</h2>
-        <p class="body-large">Each accommodation is crafted from sustainable local resources and designed to offer sweeping panoramic vistas while maintaining total ecological harmony.</p>
+      <div class="accom-header reveal-group">
+        <span class="uppercase-track reveal">Exclusive Stays</span>
+        <h2 class="heading-secondary reveal">Our Private Sanctuaries</h2>
+        <p class="body-large reveal">Each accommodation is crafted from sustainable local resources and designed to offer sweeping panoramic vistas while maintaining total ecological harmony.</p>
       </div>
       
-      <div class="accom-grid">
+      <div class="accom-grid reveal-group">
         
         <!-- Cottage Card 1 -->
         <div class="accom-card reveal">
@@ -177,7 +186,7 @@
         </div>
         
         <!-- Cottage Card 2 -->
-        <div class="accom-card reveal reveal-delay-1">
+        <div class="accom-card reveal">
           <div class="accom-img-wrapper">
             <img src="images/villa_interior.png" alt="Teak wood cottage interior bedroom">
             <span class="accom-badge">Jungle View</span>
@@ -198,7 +207,7 @@
         </div>
         
         <!-- Cottage Card 3 -->
-        <div class="accom-card reveal reveal-delay-2">
+        <div class="accom-card reveal">
           <div class="accom-img-wrapper">
             <img src="images/infinity_pool.png" alt="Infinity pool overlooking Wayanad mountains">
             <span class="accom-badge">Mountain View</span>
@@ -222,20 +231,25 @@
     </div>
   </section>
 
+  <!-- Luxury Section Divider -->
+  <div class="luxury-divider">
+    <span class="luxury-divider-icon">✦</span>
+  </div>
+
   <!-- Experiences and Amenities Section -->
   <section class="experiences section-spacing" id="experiences">
     <div class="container">
       
       <!-- Experience Block 1 -->
-      <div class="experience-block reveal">
-        <div class="experience-img-container">
+      <div class="experience-block reveal-group">
+        <div class="experience-img-container reveal">
           <img src="images/spa_wellness.png" alt="Ayurvedic spa stone treatment tables and fountain">
         </div>
-        <div class="experience-info">
-          <span class="uppercase-track text-gold">Healing & Restoration</span>
-          <h3 class="heading-secondary">Soma Spa & Forest Yoga</h3>
-          <p class="body-large">Realign your spirit through time-honored Ayurvedic wisdom and forest sound therapy. Our expert practitioners customize programs using locally-grown organic oils, heated medicinal stones, and outdoor yoga flows overlooking the misty green canopy.</p>
-          <div class="experience-details">
+        <div class="experience-info reveal-group">
+          <span class="uppercase-track reveal">Healing & Restoration</span>
+          <h3 class="heading-secondary reveal">Soma Spa & Forest Yoga</h3>
+          <p class="body-large reveal">Realign your spirit through time-honored Ayurvedic wisdom and forest sound therapy. Our expert practitioners customize programs using locally-grown organic oils, heated medicinal stones, and outdoor yoga flows overlooking the misty green canopy.</p>
+          <div class="experience-details reveal">
             <div class="exp-detail-item">
               <span class="exp-detail-title">Therapists</span>
               <span class="exp-detail-desc">Ayurvedic Acharyas</span>
@@ -245,20 +259,20 @@
               <span class="exp-detail-desc">Stone Wellness Pavilions</span>
             </div>
           </div>
-          <a href="#booking" class="btn btn-primary">Book Wellness Journey</a>
+          <a href="#booking" class="btn btn-primary reveal">Book Wellness Journey</a>
         </div>
       </div>
       
       <!-- Experience Block 2 -->
-      <div class="experience-block reveal">
-        <div class="experience-img-container">
+      <div class="experience-block reveal-group">
+        <div class="experience-img-container reveal">
           <img src="images/treetop_dining.png" alt="Lantern-lit candlelight treetop dining table and couple">
         </div>
-        <div class="experience-info">
-          <span class="uppercase-track text-gold">Culinary Art</span>
-          <h3 class="heading-secondary">Treetop Canopy Dining</h3>
-          <p class="body-large">Savor organic ingredients sourced directly from Wayanad's local spice gardens. Our spectacular open-air dining decks sit nestled in the forest canopy, offering a lantern-lit degustation menu of refined Kerala-fusion gastronomy at twilight.</p>
-          <div class="experience-details">
+        <div class="experience-info reveal-group">
+          <span class="uppercase-track reveal">Culinary Art</span>
+          <h3 class="heading-secondary reveal">Treetop Canopy Dining</h3>
+          <p class="body-large reveal">Savor organic ingredients sourced directly from Wayanad's local spice gardens. Our spectacular open-air dining decks sit nestled in the forest canopy, offering a lantern-lit degustation menu of refined Kerala-fusion gastronomy at twilight.</p>
+          <div class="experience-details reveal">
             <div class="exp-detail-item">
               <span class="exp-detail-title">Cuisine</span>
               <span class="exp-detail-desc">Kerala Spice Fusion</span>
@@ -268,7 +282,7 @@
               <span class="exp-detail-desc">Candlelit Tree Decks</span>
             </div>
           </div>
-          <a href="#booking" class="btn btn-primary">Reserve Table</a>
+          <a href="#booking" class="btn btn-primary reveal">Reserve Table</a>
         </div>
       </div>
 
@@ -276,25 +290,26 @@
   </section>
 
   <!-- Nature and Surroundings Quote (Parallax Banner) -->
-  <section class="nature section-spacing" id="nature">
-    <div class="nature-content reveal">
-      <span class="uppercase-track text-gold">Immersion</span>
-      <h3 class="nature-quote">"In the depth of Wayanad’s forest, every leaf whispers a secret of <span>ancient peace</span>, and the mountain mist wraps around you like a soft canvas."</h3>
-      <div class="nature-author">The Wayanad Chronicles</div>
-      <a href="#booking" class="btn btn-gold">Request Booking</a>
+  <section class="nature" id="nature">
+    <div class="nature-bg"></div>
+    <div class="nature-content reveal-group">
+      <span class="uppercase-track reveal" style="color: #ffffff; opacity: 0.65;">Immersion</span>
+      <h3 class="nature-quote reveal">"In the depth of Wayanad’s forest, every leaf whispers a secret of <span>ancient peace</span>, and the mountain mist wraps around you like a soft canvas."</h3>
+      <div class="nature-author reveal">The Wayanad Chronicles</div>
+      <a href="#booking" class="btn btn-gold reveal">Request Booking</a>
     </div>
   </section>
 
   <!-- Editorial Masonry Gallery Preview -->
   <section class="gallery section-spacing" id="gallery">
     <div class="container">
-      <div class="accom-header reveal">
-        <span class="uppercase-track text-gold">Visual Poetry</span>
-        <h2 class="heading-secondary">Snapshots of the Sanctuary</h2>
-        <p class="body-large">An immersive visual story of quiet details, mist-covered valleys, and luxury spaces designed to inspire rest.</p>
+      <div class="accom-header reveal-group">
+        <span class="uppercase-track reveal">Visual Poetry</span>
+        <h2 class="heading-secondary reveal">Snapshots of the Sanctuary</h2>
+        <p class="body-large reveal">An immersive visual story of quiet details, mist-covered valleys, and luxury spaces designed to inspire rest.</p>
       </div>
       
-      <div class="gallery-grid">
+      <div class="gallery-grid reveal-group">
         
         <!-- Large horizontal item -->
         <div class="gallery-item col-span-2 reveal">
@@ -306,7 +321,7 @@
         </div>
         
         <!-- Tall vertical item -->
-        <div class="gallery-item row-span-2 reveal reveal-delay-1">
+        <div class="gallery-item row-span-2 reveal">
           <img src="images/villa_interior.png" alt="Upavan room teakwood and glass facade">
           <div class="gallery-overlay">
             <span>Luxury Stay</span>
@@ -315,7 +330,7 @@
         </div>
         
         <!-- Square item -->
-        <div class="gallery-item reveal reveal-delay-2">
+        <div class="gallery-item reveal">
           <img src="images/treetop_dining.png" alt="Candlelit dining on forest deck">
           <div class="gallery-overlay">
             <span>Gastronomy</span>
@@ -324,7 +339,7 @@
         </div>
         
         <!-- Square item -->
-        <div class="gallery-item reveal reveal-delay-3">
+        <div class="gallery-item reveal">
           <img src="images/spa_wellness.png" alt="Ayurvedic hot stone massage set up">
           <div class="gallery-overlay">
             <span>Wellness</span>
@@ -333,7 +348,7 @@
         </div>
         
         <!-- Large horizontal item -->
-        <div class="gallery-item col-span-2 reveal reveal-delay-1">
+        <div class="gallery-item col-span-2 reveal">
           <img src="images/infinity_pool.png" alt="Mountain edge infinity pool">
           <div class="gallery-overlay">
             <span>Serenity</span>
@@ -345,11 +360,16 @@
     </div>
   </section>
 
+  <!-- Luxury Section Divider -->
+  <div class="luxury-divider">
+    <span class="luxury-divider-icon">✦</span>
+  </div>
+
   <!-- Guest Testimonials Section -->
   <section class="testimonials section-spacing" id="testimonials">
     <div class="container">
-      <div class="testimonials-slider reveal">
-        <div class="quote-icon">“</div>
+      <div class="testimonials-slider reveal-group">
+        <div class="quote-icon reveal">“</div>
         
         <!-- Slide 1 -->
         <div class="testimonial-slide active">
@@ -381,7 +401,7 @@
         </div>
         
         <!-- Dots container -->
-        <div class="slider-dots"></div>
+        <div class="slider-dots reveal"></div>
       </div>
     </div>
   </section>
@@ -389,13 +409,11 @@
   <!-- Booking Call-to-Action Panel -->
   <section class="booking-cta section-spacing">
     <div class="booking-cta-bg" style="background: linear-gradient(rgba(252, 251, 248, 0.95), rgba(252, 251, 248, 0.95)), url('images/hero_resort.png') no-repeat center center/cover;"></div>
-    <div class="container booking-cta-content reveal">
-      <span class="uppercase-track text-gold">Begin Your Story</span>
-      <h2 class="heading-secondary">Ready to Escape into the Mist?</h2>
-      <p class="body-large">Reserve your private cottage directly with us to enjoy exclusive sanctuary benefits, including a complimentary welcome massage and luxury airport transfers from Kozhikode.</p>
-      
-      <!-- CTA Action Button triggers scrolling to the interactive widget bar -->
-      <a href="#booking" class="btn btn-primary">Reserve Your Sanctuary</a>
+    <div class="container booking-cta-content reveal-group">
+      <span class="uppercase-track reveal">Begin Your Story</span>
+      <h2 class="heading-secondary reveal">Ready to Escape into the Mist?</h2>
+      <p class="body-large reveal">Reserve your private cottage directly with us to enjoy exclusive sanctuary benefits, including a complimentary welcome massage and luxury airport transfers from Kozhikode.</p>
+      <a href="#booking" class="btn btn-primary reveal">Reserve Your Sanctuary</a>
     </div>
   </section>
 

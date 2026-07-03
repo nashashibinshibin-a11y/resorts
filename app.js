@@ -1,5 +1,65 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+  // --- Custom Luxury Mouse Cursor ---
+  const cursorDot = document.querySelector('.custom-cursor-dot');
+  const cursorRing = document.querySelector('.custom-cursor-ring');
+  
+  if (cursorDot && cursorRing) {
+    // Only activate cursor tracking on desktop hoverable devices
+    const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+    if (isDesktop) {
+      cursorDot.style.display = 'block';
+      cursorRing.style.display = 'block';
+
+      let mouseX = 0, mouseY = 0;
+      let ringX = 0, ringY = 0;
+
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        
+        // Immediate movement for dot
+        cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+      });
+
+      // Smooth lag-follow loop for the outer ring using requestAnimationFrame
+      const updateRingPosition = () => {
+        const ease = 0.15; // Delay factor
+        ringX += (mouseX - ringX) * ease;
+        ringY += (mouseY - ringY) * ease;
+        
+        cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+        requestAnimationFrame(updateRingPosition);
+      };
+      updateRingPosition();
+
+      // Show/Hide cursor when entering/leaving window
+      document.addEventListener('mouseenter', () => {
+        cursorDot.style.opacity = '1';
+        cursorRing.style.opacity = '1';
+      });
+      document.addEventListener('mouseleave', () => {
+        cursorDot.style.opacity = '0';
+        cursorRing.style.opacity = '0';
+      });
+
+      // Expand ring when hovering interactive elements
+      const hoverables = 'a, button, input, select, textarea, .gallery-item, .slider-control, .slider-dot';
+      document.body.addEventListener('mouseover', (e) => {
+        if (e.target.closest(hoverables)) {
+          cursorRing.classList.add('active');
+        }
+      });
+      document.body.addEventListener('mouseout', (e) => {
+        if (e.target.closest(hoverables)) {
+          cursorRing.classList.remove('active');
+        }
+      });
+    }
+  }
+
+
   // --- Sticky Header Scroll Transition ---
   const header = document.querySelector('header');
   const toggleHeaderState = () => {
@@ -10,7 +70,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
   window.addEventListener('scroll', toggleHeaderState);
-  toggleHeaderState(); // Run once in case page starts scrolled
+  toggleHeaderState();
+
 
   // --- Mobile Navigation Menu Drawer ---
   const navToggle = document.querySelector('.nav-toggle');
@@ -20,12 +81,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const openMobileMenu = () => {
     mobileMenu.classList.add('active');
-    document.body.style.overflow = 'hidden'; // Stop background scroll
+    document.body.style.overflow = 'hidden';
   };
 
   const closeMobileMenu = () => {
     mobileMenu.classList.remove('active');
-    document.body.style.overflow = 'auto'; // Re-enable background scroll
+    document.body.style.overflow = 'auto';
   };
 
   if (navToggle) navToggle.addEventListener('click', openMobileMenu);
@@ -36,28 +97,80 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-  // --- Scroll Reveal Animations ---
+  // --- Scroll-Based Parallax Background ---
+  const heroBg = document.querySelector('.hero-bg');
+  const natureBg = document.querySelector('.nature-bg');
+
+  window.addEventListener('scroll', () => {
+    const scrollPos = window.scrollY;
+
+    // Translate backgrounds slowly based on scroll positions
+    if (heroBg) {
+      heroBg.style.transform = `translate3d(0, ${scrollPos * 0.25}px, 0)`;
+    }
+    if (natureBg) {
+      const parentRect = natureBg.parentElement.getBoundingClientRect();
+      const parentTop = parentRect.top + scrollPos;
+      const offset = scrollPos - parentTop;
+      natureBg.style.transform = `translate3d(0, ${offset * 0.15}px, 0)`;
+    }
+  });
+
+
+  // --- Staggered Reveal Index Injector ---
+  const revealGroups = document.querySelectorAll('.reveal-group');
+  revealGroups.forEach(group => {
+    const children = group.querySelectorAll('.reveal');
+    children.forEach((child, index) => {
+      child.style.setProperty('--stagger-delay', index + 1);
+    });
+  });
+
   const revealElements = document.querySelectorAll('.reveal');
-  
   if ('IntersectionObserver' in window) {
     const revealObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('active');
-          // Once animated, no need to track again
           observer.unobserve(entry.target);
         }
       });
     }, {
       root: null,
-      threshold: 0.12, // Trigger when 12% is visible
-      rootMargin: '0px 0px -50px 0px' // Slightly offset trigger point
+      threshold: 0.1,
+      rootMargin: '0px 0px -40px 0px'
     });
-
     revealElements.forEach(el => revealObserver.observe(el));
   } else {
-    // Fallback if IntersectionObserver is not supported
     revealElements.forEach(el => el.classList.add('active'));
+  }
+
+
+  // --- Active Nav Menu Section Link Tracker ---
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-menu .nav-link');
+
+  if ('IntersectionObserver' in window && sections.length > 0) {
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const sectionId = entry.target.getAttribute('id');
+          navLinks.forEach(link => {
+            if (link.getAttribute('href') === `#${sectionId}`) {
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
+            }
+          });
+        }
+      });
+    }, {
+      root: null,
+      threshold: 0.35, // Trigger active when 35% of the section is visible
+      rootMargin: '-10% 0px -45% 0px'
+    });
+
+    sections.forEach(sec => navObserver.observe(sec));
   }
 
 
@@ -70,7 +183,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let autoPlayTimer;
 
   if (slides.length > 0) {
-    // Create indicator dots dynamically
     slides.forEach((_, index) => {
       const dot = document.createElement('div');
       dot.classList.add('slider-dot');
@@ -130,7 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (prevBtn) prevBtn.addEventListener('click', prevSlide);
 
     startAutoplay();
-    updateSliderUI(); // initial run
+    updateSliderUI();
   }
 
 
@@ -168,14 +280,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
     
-    // Close on clicking backdrop overlay
     lightbox.addEventListener('click', (e) => {
       if (e.target === lightbox) {
         closeLightbox();
       }
     });
 
-    // Close on Esc key
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && lightbox.classList.contains('active')) {
         closeLightbox();
@@ -186,10 +296,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Booking Interaction Concept ---
   const bookingForms = document.querySelectorAll('.booking-form-trigger');
-  
-  // Set minimum date fields to today's date for quality assurance
   const dateInputs = document.querySelectorAll('input[type="date"]');
   const today = new Date().toISOString().split('T')[0];
+  
   dateInputs.forEach(input => {
     input.setAttribute('min', today);
   });
@@ -203,7 +312,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const guests = form.querySelector('.guest-count') ? form.querySelector('.guest-count').value : '2 Guests';
       const category = form.querySelector('.room-category') ? form.querySelector('.room-category').value : '';
 
-      // Validate dates
       if (!checkin || !checkout) {
         alert('Please select both Check-In and Check-Out dates.');
         return;
@@ -214,12 +322,10 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      // Format Date for User Display
       const options = { month: 'short', day: 'numeric', year: 'numeric' };
       const formattedCheckin = new Date(checkin).toLocaleDateString('en-US', options);
       const formattedCheckout = new Date(checkout).toLocaleDateString('en-US', options);
 
-      // Construct interactive notification
       const successOverlay = document.createElement('div');
       successOverlay.style.position = 'fixed';
       successOverlay.style.top = '0';
@@ -239,14 +345,14 @@ document.addEventListener('DOMContentLoaded', () => {
       successOverlay.style.transition = 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
 
       successOverlay.innerHTML = `
-        <div style="max-width: 600px; border: 1px solid rgba(200, 169, 106, 0.3); padding: 4rem 2rem; border-radius: 4px; background: rgba(23, 58, 47, 0.85); backdrop-filter: blur(10px);">
+        <div style="max-width: 600px; border: 1px solid rgba(200, 169, 106, 0.3); padding: 4rem 2rem; border-radius: 2px; background: rgba(23, 58, 47, 0.85); backdrop-filter: blur(15px);">
           <div style="font-size: 4rem; color: #C8A96A; margin-bottom: 1.5rem; line-height: 1;">✧</div>
-          <h2 style="font-size: 2.5rem; font-weight: 400; margin-bottom: 1rem; color: #C8A96A;">Reservation Requested</h2>
-          <p style="font-family: 'Manrope', sans-serif; font-size: 1.1rem; opacity: 0.9; margin-bottom: 2rem; line-height: 1.8;">
-            A sanctuary suite is waiting for you.<br>
-            Checking availability for <strong style="color: #FCFBF8">${category || 'Our Finest Cottage'}</strong> from <strong>${formattedCheckin}</strong> to <strong>${formattedCheckout}</strong> for <strong>${guests}</strong>.
+          <h2 style="font-size: 2.5rem; font-weight: 300; margin-bottom: 1rem; color: #C8A96A; letter-spacing: -0.01em;">Sanctuary Requested</h2>
+          <p style="font-family: 'Manrope', sans-serif; font-size: 1.05rem; opacity: 0.85; margin-bottom: 2.5rem; line-height: 1.8; font-weight: 300;">
+            Checking availability for <strong style="color: #FCFBF8; font-weight: 600;">${category || 'Our Finest Cottage'}</strong><br>
+            from <strong>${formattedCheckin}</strong> to <strong>${formattedCheckout}</strong> for <strong>${guests}</strong>.
           </p>
-          <button class="close-overlay" style="border: 1px solid #C8A96A; color: #C8A96A; font-family: 'Manrope', sans-serif; padding: 0.9rem 2.2rem; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 600; cursor: pointer; border-radius: 4px; transition: all 0.3s;">
+          <button class="close-overlay" style="border: 1px solid #C8A96A; color: #C8A96A; font-family: 'Manrope', sans-serif; padding: 1rem 2.5rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; font-weight: 600; cursor: pointer; border-radius: 2px; transition: all 0.3s; background: transparent;">
             Return to Sanctuary
           </button>
         </div>
@@ -255,12 +361,10 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.appendChild(successOverlay);
       document.body.style.overflow = 'hidden';
 
-      // Fade in trigger
       setTimeout(() => {
         successOverlay.style.opacity = '1';
       }, 50);
 
-      // Button interaction
       const closeBtn = successOverlay.querySelector('.close-overlay');
       closeBtn.addEventListener('mouseenter', () => {
         closeBtn.style.backgroundColor = '#C8A96A';
