@@ -11,7 +11,17 @@
   <!-- CSS Stylesheet -->
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="intro-running intro-active">
+
+  <!-- Luxury Cinematic Preloader -->
+  <div class="intro-loader" id="introLoader">
+    <div class="loader-content">
+      <span class="loader-logo">✦ UPAVAN ✦</span>
+      <div class="loader-bar-wrap">
+        <div class="loader-bar" id="loaderBar"></div>
+      </div>
+    </div>
+  </div>
 
   <!-- Custom Luxury Mouse Cursor (Desktop Only) -->
   <div class="custom-cursor-dot"></div>
@@ -58,12 +68,13 @@
 
   <!-- Hero Section -->
   <section class="hero" id="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-content reveal-group">
-      <span class="uppercase-track reveal">Wayanad, Kerala</span>
-      <h1 class="heading-primary reveal">Where Wilderness Meets Unrivaled Luxury</h1>
-      <p class="body-large reveal">Deep in the misty rainforests of Kerala, discover an eco-luxury sanctuary designed to realign your senses with the raw, tranquil rhythms of nature.</p>
-      <div class="hero-cta reveal">
+    <canvas class="hero-canvas" id="heroCanvas"></canvas>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="uppercase-track">Wayanad, Kerala</span>
+      <h1 class="heading-primary">Where Wilderness Meets Unrivaled Luxury</h1>
+      <p class="body-large">Deep in the misty rainforests of Kerala, discover an eco-luxury sanctuary designed to realign your senses with the raw, tranquil rhythms of nature.</p>
+      <div class="hero-cta">
         <a href="#booking" class="btn btn-gold">Book Your Stay</a>
         <a href="#cottages" class="btn btn-outline">Explore Rooms</a>
       </div>

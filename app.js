@@ -98,15 +98,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // --- Scroll-Based Parallax Background ---
-  const heroBg = document.querySelector('.hero-bg');
+  const heroCanvas = document.getElementById('heroCanvas');
   const natureBg = document.querySelector('.nature-bg');
 
   window.addEventListener('scroll', () => {
     const scrollPos = window.scrollY;
 
     // Translate backgrounds slowly based on scroll positions
-    if (heroBg) {
-      heroBg.style.transform = `translate3d(0, ${scrollPos * 0.25}px, 0)`;
+    if (heroCanvas) {
+      heroCanvas.style.transform = `translate3d(0, ${scrollPos * 0.25}px, 0)`;
     }
     if (natureBg) {
       const parentRect = natureBg.parentElement.getBoundingClientRect();
@@ -115,6 +115,179 @@ document.addEventListener('DOMContentLoaded', () => {
       natureBg.style.transform = `translate3d(0, ${offset * 0.15}px, 0)`;
     }
   });
+
+
+  // --- Cinematic Frame Sequence Preloader & Canvas Engine ---
+  const canvas = document.getElementById('heroCanvas');
+  const loaderBar = document.getElementById('loaderBar');
+  const introLoader = document.getElementById('introLoader');
+  const heroContent = document.querySelector('.hero-content');
+
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    const frameCount = 125;
+    const frames = [];
+    let loadedCount = 0;
+    let currentFrame = 0;
+    let lastFrameTime = 0;
+    const fps = 30;
+    const frameInterval = 1000 / fps;
+    let animId = null;
+    let introFinished = false;
+
+    // Helper: Draw image with object-fit: cover sizing
+    const drawImageCover = (img) => {
+      const w = canvas.width;
+      const h = canvas.height;
+      const iw = img.width;
+      const ih = img.height;
+      const r = Math.min(w / iw, h / ih);
+      let nw = iw * r;
+      let nh = ih * r;
+      let cx, cy, cw, ch, ar = 1;
+
+      if (nw < w) ar = w / nw;
+      if (Math.abs(nh - h) < 0.0001 && nw < w) ar = w / nw;
+      if (nh < h) ar = h / nh;
+      nw *= ar;
+      nh *= ar;
+
+      cw = iw / (nw / w);
+      ch = ih / (nh / h);
+
+      cx = (iw - cw) * 0.5;
+      cy = (ih - ch) * 0.5;
+
+      if (cx < 0) cx = 0;
+      if (cy < 0) cy = 0;
+      if (cw > iw) cw = iw;
+      if (ch > ih) ch = ih;
+
+      ctx.drawImage(img, cx, cy, cw, ch, 0, 0, w, h);
+    };
+
+    const resizeCanvas = () => {
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight;
+      if (frames[currentFrame]) {
+        drawImageCover(frames[currentFrame]);
+      }
+    };
+    window.addEventListener('resize', resizeCanvas);
+    
+    // Initial size setup
+    canvas.width = canvas.parentElement.clientWidth;
+    canvas.height = canvas.parentElement.clientHeight;
+
+    const checkRevealTriggers = (frameIndex) => {
+      // Check frame numbers and add classes to trigger CSS animations
+      if (frameIndex >= 85) {
+        header.classList.add('logo-visible');
+      }
+      if (frameIndex >= 95) {
+        header.classList.add('menu-visible');
+      }
+      if (frameIndex >= 100) {
+        if (heroContent) heroContent.classList.add('heading-visible');
+      }
+      if (frameIndex >= 110) {
+        if (heroContent) heroContent.classList.add('text-visible');
+      }
+      if (frameIndex >= 120) {
+        if (heroContent) heroContent.classList.add('cta-visible');
+      }
+    };
+
+    const finishIntro = () => {
+      introFinished = true;
+      document.body.classList.remove('intro-running', 'intro-active');
+      document.body.classList.add('intro-finished');
+      
+      // Ensure all visual elements are set to final active state
+      header.classList.add('logo-visible', 'menu-visible');
+      if (heroContent) {
+        heroContent.classList.add('heading-visible', 'text-visible', 'cta-visible');
+      }
+    };
+
+    const playSequence = (timestamp) => {
+      if (introFinished) return;
+      if (!lastFrameTime) lastFrameTime = timestamp;
+      const elapsed = timestamp - lastFrameTime;
+
+      if (elapsed >= frameInterval) {
+        currentFrame++;
+        lastFrameTime = timestamp - (elapsed % frameInterval);
+
+        if (currentFrame < frameCount) {
+          if (frames[currentFrame]) {
+            drawImageCover(frames[currentFrame]);
+          }
+          checkRevealTriggers(currentFrame);
+        } else {
+          // Playback completed
+          currentFrame = frameCount - 1;
+          if (frames[currentFrame]) {
+            drawImageCover(frames[currentFrame]);
+          }
+          finishIntro();
+          return;
+        }
+      }
+      animId = requestAnimationFrame(playSequence);
+    };
+
+    const startIntro = () => {
+      // 1. Draw the first frame instantly to show background
+      if (frames[0]) {
+        drawImageCover(frames[0]);
+      }
+      
+      // 2. Fade out loader screen
+      if (introLoader) {
+        introLoader.classList.add('fade-out');
+        setTimeout(() => {
+          introLoader.style.display = 'none';
+        }, 1200); // matches CSS fade transition time
+      }
+
+      // 3. Begin smooth playback
+      requestAnimationFrame(playSequence);
+    };
+
+    // Get frame filename path
+    const getFramePath = (index) => {
+      const pad = String(index).padStart(3, '0');
+      return `images/hero section/frame_${pad}.png`;
+    };
+
+    // Preload image files
+    for (let i = 1; i <= frameCount; i++) {
+      const img = new Image();
+      img.src = getFramePath(i);
+      img.onload = () => {
+        loadedCount++;
+        const progress = (loadedCount / frameCount) * 100;
+        if (loaderBar) {
+          loaderBar.style.width = `${progress}%`;
+        }
+        
+        if (loadedCount === frameCount) {
+          // Preloading complete
+          startIntro();
+        }
+      };
+      
+      img.onerror = () => {
+        loadedCount++;
+        if (loadedCount === frameCount) {
+          startIntro();
+        }
+      };
+      
+      frames.push(img);
+    }
+  }
 
 
   // --- Staggered Reveal Index Injector ---
