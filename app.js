@@ -62,8 +62,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Sticky Header Scroll Transition ---
   const header = document.querySelector('header');
+  const scrollContainer = document.getElementById('heroScrollContainer');
+
   const toggleHeaderState = () => {
-    if (window.scrollY > 50) {
+    const scrollPos = window.scrollY;
+    const maxScroll = scrollContainer ? (scrollContainer.clientHeight - window.innerHeight) : 0;
+    
+    // Transform to floating pill after scrolling past the sticky hero sequence
+    if (scrollPos > maxScroll + 50) {
       header.classList.add('scrolled');
     } else {
       header.classList.remove('scrolled');
@@ -98,16 +104,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // --- Scroll-Based Parallax Background ---
-  const heroCanvas = document.getElementById('heroCanvas');
   const natureBg = document.querySelector('.nature-bg');
 
   window.addEventListener('scroll', () => {
     const scrollPos = window.scrollY;
 
     // Translate backgrounds slowly based on scroll positions
-    if (heroCanvas) {
-      heroCanvas.style.transform = `translate3d(0, ${scrollPos * 0.25}px, 0)`;
-    }
     if (natureBg) {
       const parentRect = natureBg.parentElement.getBoundingClientRect();
       const parentTop = parentRect.top + scrollPos;
@@ -117,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-  // --- Cinematic Frame Sequence Preloader & Canvas Engine ---
+  // --- Scroll-Driven Cinematic Canvas Sequence Player ---
   const canvas = document.getElementById('heroCanvas');
   const loaderBar = document.getElementById('loaderBar');
   const introLoader = document.getElementById('introLoader');
@@ -128,12 +130,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const frameCount = 125;
     const frames = [];
     let loadedCount = 0;
+    
+    // LERP smoothing variables
+    let targetFrame = 0;
     let currentFrame = 0;
-    let lastFrameTime = 0;
-    const fps = 30;
-    const frameInterval = 1000 / fps;
-    let animId = null;
-    let introFinished = false;
+    const ease = 0.15; // Smooth interpolation speed factor
 
     // Helper: Draw image with object-fit: cover sizing
     const drawImageCover = (img) => {
@@ -169,8 +170,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const resizeCanvas = () => {
       canvas.width = canvas.parentElement.clientWidth;
       canvas.height = canvas.parentElement.clientHeight;
-      if (frames[currentFrame]) {
-        drawImageCover(frames[currentFrame]);
+      if (frames[Math.round(currentFrame)]) {
+        drawImageCover(frames[Math.round(currentFrame)]);
       }
     };
     window.addEventListener('resize', resizeCanvas);
@@ -180,79 +181,96 @@ document.addEventListener('DOMContentLoaded', () => {
     canvas.height = canvas.parentElement.clientHeight;
 
     const checkRevealTriggers = (frameIndex) => {
-      // Check frame numbers and add classes to trigger CSS animations
-      if (frameIndex >= 85) {
+      // Dynamic reveal transitions that adapt in BOTH scroll directions
+      if (frameIndex >= 75) {
         header.classList.add('logo-visible');
+      } else {
+        header.classList.remove('logo-visible');
       }
-      if (frameIndex >= 95) {
+
+      if (frameIndex >= 90) {
         header.classList.add('menu-visible');
+      } else {
+        header.classList.remove('menu-visible');
       }
+
       if (frameIndex >= 100) {
         if (heroContent) heroContent.classList.add('heading-visible');
+      } else {
+        if (heroContent) heroContent.classList.remove('heading-visible');
       }
+
       if (frameIndex >= 110) {
         if (heroContent) heroContent.classList.add('text-visible');
+      } else {
+        if (heroContent) heroContent.classList.remove('text-visible');
       }
+
       if (frameIndex >= 120) {
         if (heroContent) heroContent.classList.add('cta-visible');
+      } else {
+        if (heroContent) heroContent.classList.remove('cta-visible');
       }
     };
 
-    const finishIntro = () => {
-      introFinished = true;
-      document.body.classList.remove('intro-running', 'intro-active');
-      document.body.classList.add('intro-finished');
+    // Calculate target frame on scroll
+    const updateTargetFrameOnScroll = () => {
+      if (scrollContainer) {
+        const containerHeight = scrollContainer.clientHeight;
+        const windowHeight = window.innerHeight;
+        const maxScroll = containerHeight - windowHeight;
+        const scrollPos = window.scrollY;
+
+        let progress = scrollPos / maxScroll;
+        progress = Math.min(1, Math.max(0, progress));
+
+        targetFrame = progress * (frameCount - 1);
+      }
+    };
+    window.addEventListener('scroll', updateTargetFrameOnScroll);
+
+    // Continuous LERP update loop
+    const updateFrameLoop = () => {
+      const diff = targetFrame - currentFrame;
       
-      // Ensure all visual elements are set to final active state
-      header.classList.add('logo-visible', 'menu-visible');
-      if (heroContent) {
-        heroContent.classList.add('heading-visible', 'text-visible', 'cta-visible');
-      }
-    };
-
-    const playSequence = (timestamp) => {
-      if (introFinished) return;
-      if (!lastFrameTime) lastFrameTime = timestamp;
-      const elapsed = timestamp - lastFrameTime;
-
-      if (elapsed >= frameInterval) {
-        currentFrame++;
-        lastFrameTime = timestamp - (elapsed % frameInterval);
-
-        if (currentFrame < frameCount) {
-          if (frames[currentFrame]) {
-            drawImageCover(frames[currentFrame]);
-          }
-          checkRevealTriggers(currentFrame);
-        } else {
-          // Playback completed
-          currentFrame = frameCount - 1;
-          if (frames[currentFrame]) {
-            drawImageCover(frames[currentFrame]);
-          }
-          finishIntro();
-          return;
+      // Update canvas only when a change is detected to conserve computing power
+      if (Math.abs(diff) > 0.01) {
+        currentFrame += diff * ease;
+        const idx = Math.min(frameCount - 1, Math.max(0, Math.round(currentFrame)));
+        
+        if (frames[idx]) {
+          drawImageCover(frames[idx]);
         }
+        
+        checkRevealTriggers(currentFrame);
       }
-      animId = requestAnimationFrame(playSequence);
+      
+      requestAnimationFrame(updateFrameLoop);
     };
 
     const startIntro = () => {
-      // 1. Draw the first frame instantly to show background
-      if (frames[0]) {
-        drawImageCover(frames[0]);
+      // 1. Draw initial cover frames
+      updateTargetFrameOnScroll();
+      currentFrame = targetFrame;
+      const startIdx = Math.min(frameCount - 1, Math.max(0, Math.round(currentFrame)));
+      if (frames[startIdx]) {
+        drawImageCover(frames[startIdx]);
       }
+      checkRevealTriggers(currentFrame);
       
-      // 2. Fade out loader screen
+      // 2. Hide loader screen
       if (introLoader) {
         introLoader.classList.add('fade-out');
         setTimeout(() => {
           introLoader.style.display = 'none';
-        }, 1200); // matches CSS fade transition time
+        }, 1200);
       }
 
-      // 3. Begin smooth playback
-      requestAnimationFrame(playSequence);
+      // 3. Enable normal scrolling (unlock body viewport scroll)
+      document.body.classList.remove('intro-running');
+
+      // 4. Start LERP follow loop
+      requestAnimationFrame(updateFrameLoop);
     };
 
     // Get frame filename path
@@ -273,7 +291,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         if (loadedCount === frameCount) {
-          // Preloading complete
           startIntro();
         }
       };

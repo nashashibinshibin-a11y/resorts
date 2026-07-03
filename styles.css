@@ -316,21 +316,32 @@ body {
 header {
   position: fixed;
   top: 0;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   width: 100%;
   z-index: 1000;
-  transition: var(--transition-luxurious);
-  border-bottom: 1px solid rgba(255, 255, 255, 0);
+  transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              top 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              padding 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              border-radius 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              border 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(255, 255, 255, 0);
   background-color: transparent;
 }
 
 header.scrolled {
+  top: 1.5rem;
+  width: calc(100% - 4rem);
+  max-width: 1300px;
   background-color: var(--color-glass-dark);
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
-  padding: 0.9rem 0;
-  border-bottom: 1px solid rgba(200, 169, 106, 0.15);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  padding: 0.8rem 2.5rem;
+  border: 1px solid rgba(200, 169, 106, 0.2);
+  border-radius: 100px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2);
 }
 
 header:not(.scrolled) {
@@ -341,6 +352,7 @@ header:not(.scrolled) {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 }
 
 .logo {
@@ -364,10 +376,16 @@ header:not(.scrolled) {
   letter-spacing: 0.22em;
 }
 
-.nav-menu {
+.nav-menu-wrapper {
   display: flex;
   align-items: center;
   gap: var(--spacing-lg);
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
 }
 
 .nav-link {
@@ -469,15 +487,23 @@ header:not(.scrolled) {
 }
 
 
-/* --- Hero Section --- */
+.hero-scroll-container {
+  height: 300vh;
+  position: relative;
+  width: 100%;
+}
+
 .hero {
   height: 100vh;
-  position: relative;
+  position: sticky;
+  top: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--color-white);
   overflow: hidden;
+  width: 100%;
+  z-index: 1;
 }
 
 .hero-canvas {
