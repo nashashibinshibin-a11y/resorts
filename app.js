@@ -324,35 +324,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // --- Testimonials Slideshow Slider ---
-  const slides = document.querySelectorAll('.testimonial-slide');
-  const dotsContainer = document.querySelector('.slider-dots');
-  const prevBtn = document.querySelector('.slider-prev');
-  const nextBtn = document.querySelector('.slider-next');
-  let activeIndex = 0;
-  let autoPlayTimer;
+  const testimonialSlides = document.querySelectorAll('.testimonial-slide');
+  const testimonialDotsContainer = document.querySelector('.slider-dots');
+  const testimonialPrev = document.querySelector('.slider-prev');
+  const testimonialNext = document.querySelector('.slider-next');
+  let testimonialActiveIndex = 0;
+  let testimonialAutoPlayTimer;
 
-  if (slides.length > 0) {
-    slides.forEach((_, index) => {
+  if (testimonialSlides.length > 0) {
+    testimonialSlides.forEach((_, index) => {
       const dot = document.createElement('div');
       dot.classList.add('slider-dot');
       if (index === 0) dot.classList.add('active');
-      dot.addEventListener('click', () => goToSlide(index));
-      dotsContainer.appendChild(dot);
+      dot.addEventListener('click', () => goToTestimonialSlide(index));
+      if (testimonialDotsContainer) {
+        testimonialDotsContainer.appendChild(dot);
+      }
     });
 
-    const dots = document.querySelectorAll('.slider-dot');
+    const testimonialDots = document.querySelectorAll('.slider-dot');
 
-    const updateSliderUI = () => {
-      slides.forEach((slide, idx) => {
-        if (idx === activeIndex) {
+    const updateTestimonialSliderUI = () => {
+      testimonialSlides.forEach((slide, idx) => {
+        if (idx === testimonialActiveIndex) {
           slide.classList.add('active');
         } else {
           slide.classList.remove('active');
         }
       });
 
-      dots.forEach((dot, idx) => {
-        if (idx === activeIndex) {
+      testimonialDots.forEach((dot, idx) => {
+        if (idx === testimonialActiveIndex) {
           dot.classList.add('active');
         } else {
           dot.classList.remove('active');
@@ -360,38 +362,38 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     };
 
-    const nextSlide = () => {
-      activeIndex = (activeIndex + 1) % slides.length;
-      updateSliderUI();
-      resetAutoplay();
+    const nextTestimonialSlide = () => {
+      testimonialActiveIndex = (testimonialActiveIndex + 1) % testimonialSlides.length;
+      updateTestimonialSliderUI();
+      resetTestimonialAutoplay();
     };
 
-    const prevSlide = () => {
-      activeIndex = (activeIndex - 1 + slides.length) % slides.length;
-      updateSliderUI();
-      resetAutoplay();
+    const prevTestimonialSlide = () => {
+      testimonialActiveIndex = (testimonialActiveIndex - 1 + testimonialSlides.length) % testimonialSlides.length;
+      updateTestimonialSliderUI();
+      resetTestimonialAutoplay();
     };
 
-    const goToSlide = (idx) => {
-      activeIndex = idx;
-      updateSliderUI();
-      resetAutoplay();
+    const goToTestimonialSlide = (idx) => {
+      testimonialActiveIndex = idx;
+      updateTestimonialSliderUI();
+      resetTestimonialAutoplay();
     };
 
-    const startAutoplay = () => {
-      autoPlayTimer = setInterval(nextSlide, 6000);
+    const startTestimonialAutoplay = () => {
+      testimonialAutoPlayTimer = setInterval(nextTestimonialSlide, 6000);
     };
 
-    const resetAutoplay = () => {
-      clearInterval(autoPlayTimer);
-      startAutoplay();
+    const resetTestimonialAutoplay = () => {
+      clearInterval(testimonialAutoPlayTimer);
+      startTestimonialAutoplay();
     };
 
-    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
-    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+    if (testimonialNext) testimonialNext.addEventListener('click', nextTestimonialSlide);
+    if (testimonialPrev) testimonialPrev.addEventListener('click', prevTestimonialSlide);
 
-    startAutoplay();
-    updateSliderUI();
+    startTestimonialAutoplay();
+    updateTestimonialSliderUI();
   }
 
 
