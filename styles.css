@@ -711,12 +711,19 @@ header.scrolled {
   transform: scale(1.05);
 }
 
+/* Disable mouse pointer events on preview card children to make the click register bulletproof on iOS/Android/desktop */
+.hero-card > * {
+  pointer-events: none;
+}
+
 /* Mobile Responsive Hero Grid adjustments */
 @media (max-width: 1024px) {
   .hero-grid-layout {
     grid-template-columns: 1fr;
     text-align: center;
-    gap: 3rem;
+    gap: 2rem;
+    margin-top: 6rem;
+    padding-bottom: 90px; /* Keep layout clear of the overlapping booking bar at the bottom */
   }
   .hero-text-side {
     align-items: center;
@@ -733,20 +740,22 @@ header.scrolled {
   }
   .hero-cards-side {
     justify-content: center;
+    width: 100%;
   }
 }
 
 @media (max-width: 768px) {
   .hero-card {
-    width: 130px;
-    height: 180px;
+    width: 125px;
+    height: 175px;
+    border-radius: 16px;
   }
   .hero-card.active {
-    width: 145px;
-    height: 200px;
+    width: 140px;
+    height: 190px;
   }
   .hero-card .card-title {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
   }
   .hero-card .card-info {
     bottom: 12px;
@@ -756,12 +765,40 @@ header.scrolled {
 }
 
 @media (max-width: 576px) {
-  .hero-cards-side {
-    display: none;
-  }
   .hero-grid-layout {
     grid-template-columns: 1fr;
-    margin-top: 3rem;
+    margin-top: 4.5rem;
+    padding-bottom: 110px; /* More padding on small mobile screens */
+    gap: 1.5rem;
+  }
+  .hero-cards-side {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .hero-cards-track {
+    gap: 0.8rem;
+  }
+  .hero-card {
+    width: 90px;
+    height: 125px;
+    border-radius: 12px;
+  }
+  .hero-card.active {
+    width: 105px;
+    height: 140px;
+  }
+  .hero-card .card-title {
+    font-size: 0.65rem;
+  }
+  .hero-card .card-info {
+    bottom: 8px;
+    left: 8px;
+    right: 8px;
+  }
+  .hero-card .card-category {
+    font-size: 0.5rem;
+    letter-spacing: 0.05em;
   }
 }
 
