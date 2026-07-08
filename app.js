@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
       tagline: "Experience 01  ✦  Wellness",
       title: "Luxury Wellness That Changes Your Life",
       desc: "Reconnect with yourself through immersive wellness retreats surrounded by the untouched beauty of Wayanad.",
-      btnMain: "Book Your Retreat",
+      btnMain: "Book Your Retreat →",
       btnSub: "Explore Retreats",
       linkMain: "#booking",
       linkSub: "#cottages"
@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
       tagline: "Experience 02  ✦  Culinary",
       title: "Dining Above the Forest Canopy",
       desc: "Experience unforgettable evenings with curated cuisine served among the treetops and breathtaking landscapes.",
-      btnMain: "Reserve Your Table",
+      btnMain: "Reserve Your Table →",
       btnSub: "Our Culinary Vision",
       linkMain: "#booking",
       linkSub: "#experiences"
@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
       tagline: "Experience 03  ✦  Sanctuary",
       title: "A Sanctuary Hidden Within Nature",
       desc: "Wake up to misty mountains, tranquil infinity pools, and luxurious suites designed for complete relaxation.",
-      btnMain: "Explore The Sanctuary",
+      btnMain: "Explore The Sanctuary →",
       btnSub: "Explore Rooms",
       linkMain: "#booking",
       linkSub: "#cottages"
