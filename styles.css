@@ -551,6 +551,14 @@ header.scrolled {
   background-image: url('images/hero_wellness.jpg');
 }
 
+#slide-dining .slide-img {
+  background-image: url('images/hero_dining.jpg');
+}
+
+#card-dining .card-bg {
+  background-image: url('images/hero_dining.jpg');
+}
+
 #slide-sanctuary .slide-img {
   background-image: url('images/hero_sanctuary.jpg');
 }
@@ -561,23 +569,33 @@ header.scrolled {
 
 @media (max-width: 576px) {
   #slide-wellness .slide-img {
-    background-image: url('images/hero_wellness_mobile.jpg');
-    background-position: center bottom;
+    background-image: url('images/hero_wellness_mobile.png');
+    background-position: center center;
   }
   
   #card-wellness .card-bg {
-    background-image: url('images/hero_wellness_mobile.jpg');
-    background-position: center bottom;
+    background-image: url('images/hero_wellness_mobile.png');
+    background-position: center center;
+  }
+
+  #slide-dining .slide-img {
+    background-image: url('images/hero_dining_mobile.png');
+    background-position: center center;
+  }
+  
+  #card-dining .card-bg {
+    background-image: url('images/hero_dining_mobile.png');
+    background-position: center center;
   }
 
   #slide-sanctuary .slide-img {
-    background-image: url('images/hero_sanctuary_mobile.jpg');
-    background-position: center bottom; /* Adjust view focus slightly on mobile */
+    background-image: url('images/hero_sanctuary_mobile.png');
+    background-position: center center;
   }
   
   #card-sanctuary .card-bg {
-    background-image: url('images/hero_sanctuary_mobile.jpg');
-    background-position: center bottom;
+    background-image: url('images/hero_sanctuary_mobile.png');
+    background-position: center center;
   }
 }
 
