@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Manrope:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&display=swap');
 
 /* --- Custom Properties & Tokens --- */
 :root {
@@ -12,7 +12,7 @@
   --color-glass-dark: rgba(23, 58, 47, 0.75);
   --color-glass-light: rgba(252, 251, 248, 0.75);
   
-  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-serif: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
   --font-sans: 'Manrope', system-ui, -apple-system, sans-serif;
   
   --transition-luxurious: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
@@ -129,10 +129,10 @@ body {
 
 .heading-primary {
   font-family: var(--font-serif);
-  font-size: clamp(2.8rem, 6vw, 5rem);
-  line-height: 1.1;
+  font-size: clamp(3rem, 7vw, 5.8rem);
+  line-height: 1.05;
   font-weight: 300;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 .heading-secondary {
@@ -316,8 +316,9 @@ body {
 header {
   position: fixed;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   width: 100%;
   z-index: 1000;
   transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1),
@@ -379,20 +380,20 @@ header:not(.scrolled) {
 .nav-menu-wrapper {
   display: flex;
   align-items: center;
-  gap: var(--spacing-lg);
+  gap: 2.5rem;
 }
 
 .nav-menu {
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
+  gap: 1.8rem;
 }
 
 .nav-link {
   color: rgba(255, 255, 255, 0.7);
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   text-transform: uppercase;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.18em;
   font-weight: 500;
   position: relative;
   padding: 0.5rem 0;
@@ -421,15 +422,7 @@ header:not(.scrolled) {
   left: 0;
 }
 
-.nav-link.active::before {
-  content: '✧';
-  position: absolute;
-  top: -8px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 0.5rem;
-  color: var(--color-gold);
-}
+/* Removed active star top indicator for cleaner aesthetics */
 
 .btn-nav {
   padding: 0.75rem 1.8rem;
@@ -523,7 +516,7 @@ header:not(.scrolled) {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to right, rgba(23, 58, 47, 0.8) 0%, rgba(23, 58, 47, 0.35) 50%, rgba(23, 58, 47, 0.05) 100%);
+  background: linear-gradient(to bottom, rgba(23, 58, 47, 0.75) 0%, rgba(23, 58, 47, 0.45) 50%, rgba(23, 58, 47, 0.85) 100%);
   z-index: 2;
   pointer-events: none;
 }
@@ -540,7 +533,13 @@ header:not(.scrolled) {
 .hero-content .heading-primary {
   margin-bottom: var(--spacing-md);
   font-weight: 300;
-  text-shadow: 0 5px 25px rgba(23, 58, 47, 0.3);
+  text-shadow: 0 4px 20px rgba(10, 24, 20, 0.75);
+}
+
+.hero-content .heading-primary em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
 }
 
 .hero-content .body-large {
@@ -1499,28 +1498,8 @@ footer {
     grid-template-columns: 1fr 1fr;
     gap: var(--spacing-lg);
   }
-}
 
-@media (max-width: 768px) {
-  :root {
-    --spacing-xl: 5rem;
-    --spacing-xxl: 6rem;
-  }
-  
-  /* Disable custom cursor on touch screens */
-  .custom-cursor-dot,
-  .custom-cursor-ring {
-    display: none !important;
-  }
-  
-  body {
-    cursor: auto !important;
-  }
-  a, button, input, select, textarea {
-    cursor: pointer !important;
-  }
-
-  /* Mobile Nav Header */
+  /* Mobile Nav Header (Activated at 1024px) */
   header:not(.scrolled) {
     padding: 1.25rem 0;
   }
@@ -1594,6 +1573,26 @@ footer {
   
   .nav-close::before { transform: rotate(45deg); }
   .nav-close::after { transform: rotate(-45deg); }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --spacing-xl: 5rem;
+    --spacing-xxl: 6rem;
+  }
+  
+  /* Disable custom cursor on touch screens */
+  .custom-cursor-dot,
+  .custom-cursor-ring {
+    display: none !important;
+  }
+  
+  body {
+    cursor: auto !important;
+  }
+  a, button, input, select, textarea {
+    cursor: pointer !important;
+  }
   
   .hero-cta {
     flex-direction: column;
