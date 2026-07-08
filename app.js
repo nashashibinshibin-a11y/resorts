@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const slideData = [
     {
-      tagline: "Experience 01  ✦  Wellness",
+      tagline: "Wellness Experience",
       title: "Luxury Wellness That Changes Your Life",
       desc: "Reconnect with yourself through immersive wellness retreats surrounded by the untouched beauty of Wayanad.",
       btnMain: "Book Your Retreat →",
@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
       linkSub: "#cottages"
     },
     {
-      tagline: "Experience 02  ✦  Culinary",
+      tagline: "Culinary Experience",
       title: "Dining Above the Forest Canopy",
       desc: "Experience unforgettable evenings with curated cuisine served among the treetops and breathtaking landscapes.",
       btnMain: "Reserve Your Table →",
@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
       linkSub: "#experiences"
     },
     {
-      tagline: "Experience 03  ✦  Sanctuary",
+      tagline: "Sanctuary Experience",
       title: "A Sanctuary Hidden Within Nature",
       desc: "Wake up to misty mountains, tranquil infinity pools, and luxurious suites designed for complete relaxation.",
       btnMain: "Explore The Sanctuary →",
