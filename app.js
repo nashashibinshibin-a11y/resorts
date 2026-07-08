@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       // Expand ring when hovering interactive elements
-      const hoverables = 'a, button, input, select, textarea, .gallery-item, .slider-control, .slider-dot';
+      const hoverables = 'a, button, input, select, textarea, .gallery-item, .slider-control, .slider-dot, .hero-card, .control-arrow';
       document.body.addEventListener('mouseover', (e) => {
         if (e.target.closest(hoverables)) {
           cursorRing.classList.add('active');
@@ -130,31 +130,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const slideData = [
     {
-      tagline: "Private. Personal. Transformative.",
+      tagline: "Experience 01  ✦  Wellness",
       title: "Luxury Wellness That Changes Your Life",
-      desc: "Personalized wellness & forest retreats that restore your body, mind, and energy — in India's most tranquil, luxurious setting.",
-      btnMain: "Book Your Consultation",
+      desc: "Reconnect with yourself through immersive wellness retreats surrounded by the untouched beauty of Wayanad.",
+      btnMain: "Book Your Retreat",
       btnSub: "Explore Retreats",
       linkMain: "#booking",
       linkSub: "#cottages"
     },
     {
-      tagline: "Organic. Sustainable. Elevated.",
-      title: "Treetop Gastronomy Above the Canopies",
-      desc: "Indulge in organic, farm-to-table culinary creations prepared by master chefs, suspended high in ancient forest canopies under the starry sky.",
-      btnMain: "Reserve A Table",
+      tagline: "Experience 02  ✦  Culinary",
+      title: "Dining Above the Forest Canopy",
+      desc: "Experience unforgettable evenings with curated cuisine served among the treetops and breathtaking landscapes.",
+      btnMain: "Reserve Your Table",
       btnSub: "Our Culinary Vision",
       linkMain: "#booking",
       linkSub: "#experiences"
     },
     {
-      tagline: "Pure. Mineral-Rich. Rejuvenating.",
-      title: "Thermal Springs Facing Endless Wilderness",
-      desc: "Submerge into mineral-rich heated pools overlooking the forest valley canopy, designed to realign your senses with nature's rhythm.",
-      btnMain: "Book Spa Day",
-      btnSub: "Explore Hydrotherapy",
+      tagline: "Experience 03  ✦  Sanctuary",
+      title: "A Sanctuary Hidden Within Nature",
+      desc: "Wake up to misty mountains, tranquil infinity pools, and luxurious suites designed for complete relaxation.",
+      btnMain: "Explore The Sanctuary",
+      btnSub: "Explore Rooms",
       linkMain: "#booking",
-      linkSub: "#experiences"
+      linkSub: "#cottages"
     }
   ];
 
@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isTransitioning || targetIdx === currentIdx) return;
     isTransitioning = true;
 
-    // 1. Add transition class to content wrapper to fade out text
+    // 1. Add transition class to content wrapper to trigger staggered fade-out
     if (contentWrapper) {
       contentWrapper.classList.add('slide-changing');
     }
@@ -178,7 +178,13 @@ document.addEventListener('DOMContentLoaded', () => {
     cards[currentIdx].classList.remove('active');
     cards[targetIdx].classList.add('active');
 
-    // 4. After text fade-out transition completes (350ms)
+    // Reset slide scroll translation instantly for the incoming layer
+    const nextImg = slides[targetIdx].querySelector('.slide-img');
+    if (nextImg) {
+      nextImg.style.transform = 'scale(1.05) translate3d(0, 0, 0)';
+    }
+
+    // 4. Update texts and fade content back in after fade-out transition finishes (350ms)
     setTimeout(() => {
       // Update text fields
       if (slideTagline) slideTagline.textContent = slideData[targetIdx].tagline;
@@ -193,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
         slideBtnSub.setAttribute('href', slideData[targetIdx].linkSub);
       }
 
-      // Fade content back in
+      // Fade content back in with staggered CSS delay
       if (contentWrapper) {
         contentWrapper.classList.remove('slide-changing');
       }
@@ -248,6 +254,16 @@ document.addEventListener('DOMContentLoaded', () => {
   cards.forEach(card => card.addEventListener('click', resetAutoPlay));
   if (prevBtn) prevBtn.addEventListener('click', resetAutoPlay);
   if (nextBtn) nextBtn.addEventListener('click', resetAutoPlay);
+
+  // --- Background Image Scroll Parallax ---
+  window.addEventListener('scroll', () => {
+    const scrollPos = window.scrollY;
+    const activeImg = document.querySelector('.hero-slide.active .slide-img');
+    if (activeImg && scrollPos < window.innerHeight) {
+      // Sub-image slow translate for depth effect without fighting z-index crossfade
+      activeImg.style.transform = `scale(1.05) translate3d(0, ${scrollPos * 0.15}px, 0)`;
+    }
+  });
 
 
   // --- Staggered Reveal Index Injector ---

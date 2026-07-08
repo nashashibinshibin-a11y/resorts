@@ -519,19 +519,27 @@ header.scrolled {
   left: 0;
   width: 100%;
   height: 100%;
-  background-size: cover;
-  background-position: center;
+  overflow: hidden;
   opacity: 0;
-  transform: scale(1.03);
   z-index: 1; /* Keep base z-index declared for cross-fade transitions */
-  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 1.0s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .hero-slide.active {
   opacity: 1;
-  transform: scale(1);
   z-index: 2; /* Slide fades in on top of the inactive layers */
+}
+
+.slide-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.05); /* Extra headroom for smooth scroll parallax translate */
+  will-change: transform;
 }
 
 .hero-overlay {
@@ -540,7 +548,7 @@ header.scrolled {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to right, rgba(42, 39, 36, 0.65) 0%, rgba(42, 39, 36, 0.25) 55%, transparent 100%);
+  background: linear-gradient(to right, rgba(42, 39, 36, 0.65) 0%, rgba(42, 39, 36, 0.3) 55%, transparent 100%);
   z-index: 3;
   pointer-events: none;
 }
@@ -568,15 +576,71 @@ header.scrolled {
 }
 
 .hero-content-wrapper {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
-.hero-content-wrapper.slide-changing {
+/* Staggered element-by-element text transitions */
+.hero-content-wrapper .slide-tagline {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1),
+              transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  transition-delay: 0s;
+}
+
+.hero-content-wrapper .slide-title {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.9s cubic-bezier(0.25, 1, 0.5, 1),
+              transform 0.9s cubic-bezier(0.25, 1, 0.5, 1);
+  transition-delay: 0.08s;
+}
+
+.hero-content-wrapper .slide-desc {
+  opacity: 0.9;
+  transform: translateY(0);
+  transition: opacity 0.9s cubic-bezier(0.25, 1, 0.5, 1),
+              transform 0.9s cubic-bezier(0.25, 1, 0.5, 1);
+  transition-delay: 0.16s;
+}
+
+.hero-content-wrapper .hero-cta {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1),
+              transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  transition-delay: 0.24s;
+}
+
+/* Slide transition fade-out/slide-up state */
+.hero-content-wrapper.slide-changing .slide-tagline {
   opacity: 0;
-  transform: translateY(15px);
+  transform: translateY(-10px);
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  transition-delay: 0s;
+}
+
+.hero-content-wrapper.slide-changing .slide-title {
+  opacity: 0;
+  transform: translateY(-15px);
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  transition-delay: 0s;
+}
+
+.hero-content-wrapper.slide-changing .slide-desc {
+  opacity: 0;
+  transform: translateY(-15px);
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  transition-delay: 0s;
+}
+
+.hero-content-wrapper.slide-changing .hero-cta {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  transition-delay: 0s;
 }
 
 /* Slide Controls */
@@ -642,6 +706,7 @@ header.scrolled {
   overflow: hidden;
   cursor: pointer;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+  filter: brightness(0.65) grayscale(0.25); /* Muted inactive tab state */
   transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   border: 2px solid transparent;
 }
@@ -693,6 +758,7 @@ header.scrolled {
 /* Hover & Active Card styles */
 .hero-card:hover {
   transform: translateY(-8px);
+  filter: brightness(0.85) grayscale(0);
   box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
 }
 
@@ -704,7 +770,8 @@ header.scrolled {
   width: 195px;
   height: 265px;
   border-color: var(--color-gold);
-  box-shadow: 0 20px 45px rgba(141, 123, 96, 0.35);
+  filter: brightness(1.1) grayscale(0); /* Bright glow tab active state */
+  box-shadow: 0 0 30px rgba(200, 169, 106, 0.45), 0 20px 45px rgba(0, 0, 0, 0.35);
 }
 
 .hero-card.active .card-info {
