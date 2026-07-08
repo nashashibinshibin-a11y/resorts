@@ -62,14 +62,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Sticky Header Scroll Transition ---
   const header = document.querySelector('header');
-  const scrollContainer = document.getElementById('heroScrollContainer');
 
   const toggleHeaderState = () => {
-    const scrollPos = window.scrollY;
-    const maxScroll = scrollContainer ? (scrollContainer.clientHeight - window.innerHeight) : 0;
-    
-    // Transform to floating pill after scrolling past the sticky hero sequence
-    if (scrollPos > maxScroll + 50) {
+    // Transition header styling when scrolling down from the top of the page
+    if (window.scrollY > 50) {
       header.classList.add('scrolled');
     } else {
       header.classList.remove('scrolled');
@@ -119,207 +115,28 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-  // --- Scroll-Driven Cinematic Canvas Sequence Player ---
-  const canvas = document.getElementById('heroCanvas');
-  const loaderBar = document.getElementById('loaderBar');
-  const introLoader = document.getElementById('introLoader');
-  const heroContent = document.querySelector('.hero-content');
-
-  if (canvas) {
-    const ctx = canvas.getContext('2d');
-    
-    // Set high-quality scaling algorithms on the context
-    ctx.imageSmoothingEnabled = true;
-    ctx.imageSmoothingQuality = 'high';
-
-    const frameCount = 125;
-    const frames = [];
-    let loadedCount = 0;
-    
-    // LERP smoothing variables
-    let targetFrame = 0;
-    let currentFrame = 0;
-    const ease = 0.15; // Smooth interpolation speed factor
-
-    // Helper: Draw image with object-fit: cover sizing
-    const drawImageCover = (img) => {
-      const w = canvas.width;
-      const h = canvas.height;
-      const iw = img.width;
-      const ih = img.height;
-      const r = Math.min(w / iw, h / ih);
-      let nw = iw * r;
-      let nh = ih * r;
-      let cx, cy, cw, ch, ar = 1;
-
-      if (nw < w) ar = w / nw;
-      if (Math.abs(nh - h) < 0.0001 && nw < w) ar = w / nw;
-      if (nh < h) ar = h / nh;
-      nw *= ar;
-      nh *= ar;
-
-      cw = iw / (nw / w);
-      ch = ih / (nh / h);
-
-      cx = (iw - cw) * 0.5;
-      cy = (ih - ch) * 0.5;
-
-      if (cx < 0) cx = 0;
-      if (cy < 0) cy = 0;
-      if (cw > iw) cw = iw;
-      if (ch > ih) ch = ih;
-
-      ctx.drawImage(img, cx, cy, cw, ch, 0, 0, w, h);
-    };
-
-    const resizeCanvas = () => {
-      // Support high-density/Retina displays by scaling internal buffer with DPR
-      const dpr = window.devicePixelRatio || 1;
-      canvas.width = canvas.parentElement.clientWidth * dpr;
-      canvas.height = canvas.parentElement.clientHeight * dpr;
+  // --- Hero Section Image Load Animation ---
+  const heroSection = document.getElementById('hero');
+  if (heroSection) {
+    // Optional micro-interaction to fade-in hero content beautifully
+    const heroContent = heroSection.querySelector('.hero-content');
+    const scrollIndicator = heroSection.querySelector('.scroll-indicator');
+    if (heroContent) {
+      heroContent.style.opacity = '0';
+      heroContent.style.transform = 'translateY(20px)';
+      heroContent.style.transition = 'opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1), transform 1.5s cubic-bezier(0.16, 1, 0.3, 1)';
       
-      // Re-enable high-quality scaling on resize (resizing resets canvas context states)
-      ctx.imageSmoothingEnabled = true;
-      ctx.imageSmoothingQuality = 'high';
-
-      if (frames[Math.round(currentFrame)]) {
-        drawImageCover(frames[Math.round(currentFrame)]);
-      }
-    };
-    window.addEventListener('resize', resizeCanvas);
-    
-    // Initial size setup with high-density DPI support
-    const dpr = window.devicePixelRatio || 1;
-    canvas.width = canvas.parentElement.clientWidth * dpr;
-    canvas.height = canvas.parentElement.clientHeight * dpr;
-    
-    // Re-enable high-quality scaling on initial load
-    ctx.imageSmoothingEnabled = true;
-    ctx.imageSmoothingQuality = 'high';
-
-    const checkRevealTriggers = (frameIndex) => {
-      // Dynamic reveal transitions that adapt in BOTH scroll directions
-      if (frameIndex >= 75) {
-        header.classList.add('logo-visible');
-      } else {
-        header.classList.remove('logo-visible');
-      }
-
-      if (frameIndex >= 90) {
-        header.classList.add('menu-visible');
-      } else {
-        header.classList.remove('menu-visible');
-      }
-
-      if (frameIndex >= 100) {
-        if (heroContent) heroContent.classList.add('heading-visible');
-      } else {
-        if (heroContent) heroContent.classList.remove('heading-visible');
-      }
-
-      if (frameIndex >= 110) {
-        if (heroContent) heroContent.classList.add('text-visible');
-      } else {
-        if (heroContent) heroContent.classList.remove('text-visible');
-      }
-
-      if (frameIndex >= 120) {
-        if (heroContent) heroContent.classList.add('cta-visible');
-      } else {
-        if (heroContent) heroContent.classList.remove('cta-visible');
-      }
-    };
-
-    // Calculate target frame on scroll
-    const updateTargetFrameOnScroll = () => {
-      if (scrollContainer) {
-        const containerHeight = scrollContainer.clientHeight;
-        const windowHeight = window.innerHeight;
-        const maxScroll = containerHeight - windowHeight;
-        const scrollPos = window.scrollY;
-
-        let progress = scrollPos / maxScroll;
-        progress = Math.min(1, Math.max(0, progress));
-
-        targetFrame = progress * (frameCount - 1);
-      }
-    };
-    window.addEventListener('scroll', updateTargetFrameOnScroll);
-
-    // Continuous LERP update loop
-    const updateFrameLoop = () => {
-      const diff = targetFrame - currentFrame;
-      
-      // Update canvas only when a change is detected to conserve computing power
-      if (Math.abs(diff) > 0.01) {
-        currentFrame += diff * ease;
-        const idx = Math.min(frameCount - 1, Math.max(0, Math.round(currentFrame)));
-        
-        if (frames[idx]) {
-          drawImageCover(frames[idx]);
-        }
-        
-        checkRevealTriggers(currentFrame);
-      }
-      
-      requestAnimationFrame(updateFrameLoop);
-    };
-
-    const startIntro = () => {
-      // 1. Draw initial cover frames
-      updateTargetFrameOnScroll();
-      currentFrame = targetFrame;
-      const startIdx = Math.min(frameCount - 1, Math.max(0, Math.round(currentFrame)));
-      if (frames[startIdx]) {
-        drawImageCover(frames[startIdx]);
-      }
-      checkRevealTriggers(currentFrame);
-      
-      // 2. Hide loader screen
-      if (introLoader) {
-        introLoader.classList.add('fade-out');
-        setTimeout(() => {
-          introLoader.style.display = 'none';
-        }, 1200);
-      }
-
-      // 3. Enable normal scrolling (unlock body viewport scroll)
-      document.body.classList.remove('intro-running');
-
-      // 4. Start LERP follow loop
-      requestAnimationFrame(updateFrameLoop);
-    };
-
-    // Get frame filename path
-    const getFramePath = (index) => {
-      const pad = String(index).padStart(3, '0');
-      return `images/hero section/frame_${pad}.png`;
-    };
-
-    // Preload image files
-    for (let i = 1; i <= frameCount; i++) {
-      const img = new Image();
-      img.src = getFramePath(i);
-      img.onload = () => {
-        loadedCount++;
-        const progress = (loadedCount / frameCount) * 100;
-        if (loaderBar) {
-          loaderBar.style.width = `${progress}%`;
-        }
-        
-        if (loadedCount === frameCount) {
-          startIntro();
-        }
-      };
-      
-      img.onerror = () => {
-        loadedCount++;
-        if (loadedCount === frameCount) {
-          startIntro();
-        }
-      };
-      
-      frames.push(img);
+      setTimeout(() => {
+        heroContent.style.opacity = '1';
+        heroContent.style.transform = 'translateY(0)';
+      }, 300);
+    }
+    if (scrollIndicator) {
+      scrollIndicator.style.opacity = '0';
+      scrollIndicator.style.transition = 'opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1)';
+      setTimeout(() => {
+        scrollIndicator.style.opacity = '0.8';
+      }, 1000);
     }
   }
 
