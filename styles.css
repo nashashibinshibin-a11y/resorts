@@ -320,7 +320,7 @@ header {
   z-index: 1000;
   background-color: transparent;
   border-bottom: none;
-  padding: 2.2rem 0; /* generous navbar height transparent over hero */
+  padding: 2.6rem 0; /* increased spacing */
   transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -329,12 +329,12 @@ header.scrolled {
   width: calc(100% - 64px); /* generous screen margin */
   max-width: 1400px;
   background-color: rgba(36, 34, 32, 0.85) !important;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  border-radius: 20px;
+  border-radius: 24px; /* refined rounded corners */
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
-  padding: 1rem 0;
+  padding: 1.2rem 0; /* increased height on scrolled header */
 }
 
 .nav-container {
@@ -395,14 +395,14 @@ header.scrolled {
   display: flex;
   align-items: center;
   justify-content: center; /* Group links together in the center */
-  gap: 2.2rem;
+  gap: 2.6rem; /* increased spacing between links */
 }
 
 .nav-link {
   color: rgba(255, 255, 255, 0.75); /* warm light ivory links over hero */
-  font-size: 0.7rem;
+  font-size: 0.85rem; /* increased font size */
   text-transform: uppercase;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.22em; /* improved letter spacing */
   font-weight: 500;
   position: relative;
   padding: 0.5rem 0;
@@ -437,13 +437,13 @@ header.scrolled {
 }
 
 .btn-nav {
-  padding: 0.6rem 1.6rem;
-  font-size: 0.7rem;
+  padding: 0.7rem 1.8rem; /* slightly larger padding */
+  font-size: 0.8rem; /* increased font size */
   letter-spacing: 0.15em;
   background-color: transparent;
   border: 1px solid rgba(255, 255, 255, 0.35);
   color: var(--color-white);
-  border-radius: 30px; /* elegant rounded border buttons */
+  border-radius: 50px; /* pill-shaped corners */
   font-weight: 500;
   text-transform: uppercase;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -612,7 +612,7 @@ header.scrolled {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 20% 50%, rgba(36, 34, 32, 0.75) 0%, rgba(36, 34, 32, 0.25) 50%, transparent 100%);
+  background: radial-gradient(circle at 15% 50%, rgba(36, 34, 32, 0.55) 0%, rgba(36, 34, 32, 0.1) 60%, transparent 100%);
   z-index: 3;
   pointer-events: none;
 }
@@ -646,7 +646,7 @@ header.scrolled {
 .hero-content-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2.2rem; /* increased spacing for breathing room */
 }
 
 /* Staggered element-by-element text transitions */
@@ -671,12 +671,13 @@ header.scrolled {
               transform 0.9s cubic-bezier(0.25, 1, 0.5, 1);
   transition-delay: 0.08s;
   font-family: var(--font-serif);
-  font-size: 3.4rem;
+  font-size: 2.85rem; /* reduced ~15% */
   font-weight: 300;
-  line-height: 1.25;
+  line-height: 1.35; /* increased line height */
   color: var(--color-white);
   margin: 0;
-  max-width: 95%;
+  max-width: 580px; /* balanced wrapping across 2 lines */
+  letter-spacing: -0.01em; /* refined spacing */
 }
 
 .hero-content-wrapper .slide-divider {
@@ -698,11 +699,11 @@ header.scrolled {
               transform 0.9s cubic-bezier(0.25, 1, 0.5, 1);
   transition-delay: 0.16s;
   font-family: var(--font-sans);
-  font-size: 1.0rem;
+  font-size: 1.375rem; /* 22px paragraph font size */
   font-weight: 300;
-  line-height: 1.7;
+  line-height: 1.85; /* increased readability line height */
   color: rgba(255, 255, 255, 0.85);
-  max-width: 90%;
+  max-width: 480px; /* limited paragraph width */
   margin-bottom: 0.5rem;
 }
 
@@ -718,17 +719,19 @@ header.scrolled {
 }
 
 .hero-cta .btn {
-  padding: 0.8rem 2.0rem;
-  font-size: 0.75rem;
-  letter-spacing: 0.18em;
+  height: 56px; /* 56px luxury height */
+  padding: 0 2.8rem; /* increased horizontal padding */
+  font-size: 0.8rem; /* improved button typography */
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   font-weight: 500;
-  border-radius: 30px;
+  border-radius: 50px; /* pill-shaped corners */
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border-width: 1px !important; /* reduced border thickness */
 }
 
 .hero-cta .btn-gold {
@@ -741,13 +744,13 @@ header.scrolled {
   background-color: var(--color-gold) !important;
   border-color: var(--color-gold) !important;
   color: #242220 !important;
-  transform: translateY(-3px) !important;
-  box-shadow: 0 10px 25px rgba(200, 169, 106, 0.3) !important;
+  transform: translateY(-2px) !important; /* subtle lift */
+  box-shadow: 0 8px 20px rgba(200, 169, 106, 0.2) !important;
 }
 
 .hero-cta .btn-outline {
   background-color: transparent !important;
-  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
   color: var(--color-white) !important;
 }
 
@@ -755,7 +758,7 @@ header.scrolled {
   background-color: rgba(255, 255, 255, 0.08) !important;
   border-color: rgba(255, 255, 255, 0.75) !important;
   color: var(--color-white) !important;
-  transform: translateY(-3px) !important;
+  transform: translateY(-2px) !important; /* subtle lift */
 }
 
 /* Slide transition fade-out/slide-up state */
@@ -840,13 +843,14 @@ header.scrolled {
   justify-content: flex-end;
   align-items: flex-end; /* anchor toward lower-right */
   overflow: visible;
-  padding-bottom: 2rem;
+  padding-bottom: 1.5rem; /* moved slightly lower */
+  margin-right: -1rem; /* moved slightly further right */
   height: 100%;
 }
 
 .hero-cards-track {
   display: flex;
-  gap: 1.5rem;
+  gap: 2.2rem; /* increased spacing between cards */
   align-items: flex-end; /* cards align at the bottom */
 }
 
@@ -856,15 +860,15 @@ header.scrolled {
   display: flex;
   flex-direction: column;
   padding: 12px;
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.02); /* improved light glass fill */
+  backdrop-filter: blur(24px); /* increased blur depth */
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.06); /* thinner, lighter border */
   border-radius: 24px;
-  width: 175px;
+  width: 160px; /* reduced inactive width slightly */
   height: auto;
   cursor: pointer;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3); /* subtle inactive shadows */
   filter: brightness(0.7) grayscale(0.2);
   transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -872,7 +876,7 @@ header.scrolled {
 .hero-card .card-image-wrapper {
   position: relative;
   width: 100%;
-  height: 145px;
+  height: 140px;
   border-radius: 16px;
   overflow: hidden;
   margin-bottom: 12px;
@@ -916,7 +920,7 @@ header.scrolled {
 .hero-card:hover {
   transform: translateY(-8px) scale(1.03);
   filter: brightness(0.9) grayscale(0);
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3), 0 0 15px rgba(255, 255, 255, 0.08);
+  box-shadow: 0 25px 55px rgba(0, 0, 0, 0.35), 0 0 15px rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.25);
 }
 
@@ -925,10 +929,10 @@ header.scrolled {
 }
 
 .hero-card.active {
-  width: 190px;
+  width: 225px; /* active card increased by 20% */
   border-color: var(--color-gold);
-  filter: brightness(1.1) grayscale(0); /* Brightest active state */
-  box-shadow: 0 0 30px rgba(200, 169, 106, 0.25), 0 20px 45px rgba(0, 0, 0, 0.3);
+  filter: brightness(1.15) grayscale(0); /* clear visual focal point */
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45), 0 0 30px rgba(200, 169, 106, 0.15);
 }
 
 .hero-card.active .card-image-wrapper {
