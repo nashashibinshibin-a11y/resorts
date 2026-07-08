@@ -115,30 +115,139 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-  // --- Hero Section Image Load Animation ---
-  const heroSection = document.getElementById('hero');
-  if (heroSection) {
-    // Optional micro-interaction to fade-in hero content beautifully
-    const heroContent = heroSection.querySelector('.hero-content');
-    const scrollIndicator = heroSection.querySelector('.scroll-indicator');
-    if (heroContent) {
-      heroContent.style.opacity = '0';
-      heroContent.style.transform = 'translateY(20px)';
-      heroContent.style.transition = 'opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1), transform 1.5s cubic-bezier(0.16, 1, 0.3, 1)';
+  // --- Interactive Hero Section Slider ---
+  const slides = document.querySelectorAll('.hero-slide');
+  const cards = document.querySelectorAll('.hero-card');
+  const prevBtn = document.querySelector('.prev-slide');
+  const nextBtn = document.querySelector('.next-slide');
+  const contentWrapper = document.querySelector('.hero-content-wrapper');
+  
+  const slideTagline = document.querySelector('.slide-tagline');
+  const slideTitle = document.querySelector('.slide-title');
+  const slideDesc = document.querySelector('.slide-desc');
+  const slideBtnMain = document.querySelector('.slide-btn-main');
+  const slideBtnSub = document.querySelector('.slide-btn-sub');
+
+  const slideData = [
+    {
+      tagline: "Private. Personal. Transformative.",
+      title: "Luxury Wellness That Changes Your Life",
+      desc: "Personalized wellness & forest retreats that restore your body, mind, and energy — in India's most tranquil, luxurious setting.",
+      btnMain: "Book Your Consultation",
+      btnSub: "Explore Retreats",
+      linkMain: "#booking",
+      linkSub: "#cottages"
+    },
+    {
+      tagline: "Organic. Sustainable. Elevated.",
+      title: "Treetop Gastronomy Above the Canopies",
+      desc: "Indulge in organic, farm-to-table culinary creations prepared by master chefs, suspended high in ancient forest canopies under the starry sky.",
+      btnMain: "Reserve A Table",
+      btnSub: "Our Culinary Vision",
+      linkMain: "#booking",
+      linkSub: "#experiences"
+    },
+    {
+      tagline: "Pure. Mineral-Rich. Rejuvenating.",
+      title: "Thermal Springs Facing Endless Wilderness",
+      desc: "Submerge into mineral-rich heated pools overlooking the forest valley canopy, designed to realign your senses with nature's rhythm.",
+      btnMain: "Book Spa Day",
+      btnSub: "Explore Hydrotherapy",
+      linkMain: "#booking",
+      linkSub: "#experiences"
+    }
+  ];
+
+  let currentIdx = 0;
+  let isTransitioning = false;
+
+  const changeSlide = (targetIdx) => {
+    if (isTransitioning || targetIdx === currentIdx) return;
+    isTransitioning = true;
+
+    // 1. Add transition class to content wrapper to fade out text
+    if (contentWrapper) {
+      contentWrapper.classList.add('slide-changing');
+    }
+
+    // 2. Update active slide layer
+    slides[currentIdx].classList.remove('active');
+    slides[targetIdx].classList.add('active');
+
+    // 3. Update active card preview
+    cards[currentIdx].classList.remove('active');
+    cards[targetIdx].classList.add('active');
+
+    // 4. After text fade-out transition completes (350ms)
+    setTimeout(() => {
+      // Update text fields
+      if (slideTagline) slideTagline.textContent = slideData[targetIdx].tagline;
+      if (slideTitle) slideTitle.innerHTML = slideData[targetIdx].title;
+      if (slideDesc) slideDesc.textContent = slideData[targetIdx].desc;
+      if (slideBtnMain) {
+        slideBtnMain.textContent = slideData[targetIdx].btnMain;
+        slideBtnMain.setAttribute('href', slideData[targetIdx].linkMain);
+      }
+      if (slideBtnSub) {
+        slideBtnSub.textContent = slideData[targetIdx].btnSub;
+        slideBtnSub.setAttribute('href', slideData[targetIdx].linkSub);
+      }
+
+      // Fade content back in
+      if (contentWrapper) {
+        contentWrapper.classList.remove('slide-changing');
+      }
       
-      setTimeout(() => {
-        heroContent.style.opacity = '1';
-        heroContent.style.transform = 'translateY(0)';
-      }, 300);
-    }
-    if (scrollIndicator) {
-      scrollIndicator.style.opacity = '0';
-      scrollIndicator.style.transition = 'opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1)';
-      setTimeout(() => {
-        scrollIndicator.style.opacity = '0.8';
-      }, 1000);
-    }
+      currentIdx = targetIdx;
+      isTransitioning = false;
+    }, 380);
+  };
+
+  // Click card previews to change slide
+  cards.forEach((card) => {
+    card.addEventListener('click', () => {
+      const targetIdx = parseInt(card.getAttribute('data-index'), 10);
+      changeSlide(targetIdx);
+    });
+  });
+
+  // Prev & Next arrows
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      let targetIdx = currentIdx - 1;
+      if (targetIdx < 0) targetIdx = slideData.length - 1;
+      changeSlide(targetIdx);
+    });
   }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      let targetIdx = currentIdx + 1;
+      if (targetIdx >= slideData.length) targetIdx = 0;
+      changeSlide(targetIdx);
+    });
+  }
+
+  // Auto-play slides every 8 seconds for dynamic feel
+  let autoPlayTimer = setInterval(() => {
+    let targetIdx = currentIdx + 1;
+    if (targetIdx >= slideData.length) targetIdx = 0;
+    changeSlide(targetIdx);
+  }, 8000);
+
+  // Reset autoplay timer on user interaction
+  const resetAutoPlay = () => {
+    clearInterval(autoPlayTimer);
+    autoPlayTimer = setInterval(() => {
+      let targetIdx = currentIdx + 1;
+      if (targetIdx >= slideData.length) targetIdx = 0;
+      changeSlide(targetIdx);
+    }, 10000); // give user slightly more time on manual override
+  };
+
+  cards.forEach(card => card.addEventListener('click', resetAutoPlay));
+  if (prevBtn) prevBtn.addEventListener('click', resetAutoPlay);
+  if (nextBtn) nextBtn.addEventListener('click', resetAutoPlay);
 
 
   // --- Staggered Reveal Index Injector ---

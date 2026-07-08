@@ -70,15 +70,71 @@
 
   <!-- Hero Section -->
   <section class="hero" id="hero">
+    <!-- Slider Background Layers -->
+    <div class="hero-slides">
+      <div class="hero-slide active" style="background-image: url('images/hero_meditation.png');"></div>
+      <div class="hero-slide" style="background-image: url('images/hero_dining.png');"></div>
+      <div class="hero-slide" style="background-image: url('images/hero_pool.png');"></div>
+    </div>
+
     <div class="hero-overlay"></div>
+    
     <div class="container hero-container">
-      <div class="hero-content">
-        <span class="uppercase-track">Private. Personal. Transformative.</span>
-        <h1 class="heading-primary">Luxury Wellness That Changes Your Life</h1>
-        <p class="body-large">Personalized wellness & forest retreats that restore your body, mind, and energy — in India's most tranquil, luxurious setting.</p>
-        <div class="hero-cta">
-          <a href="#booking" class="btn btn-gold">Book Your Consultation</a>
-          <a href="#cottages" class="btn btn-outline">Explore Retreats</a>
+      <div class="hero-grid-layout">
+        <!-- Left Side: Text Details & Controls -->
+        <div class="hero-text-side">
+          <div class="hero-content-wrapper">
+            <span class="uppercase-track slide-tagline">Private. Personal. Transformative.</span>
+            <h1 class="heading-primary slide-title">Luxury Wellness That Changes Your Life</h1>
+            <p class="body-large slide-desc">Personalized wellness & forest retreats that restore your body, mind, and energy — in India's most tranquil, luxurious setting.</p>
+            <div class="hero-cta">
+              <a href="#booking" class="btn btn-gold slide-btn-main">Book Your Consultation</a>
+              <a href="#cottages" class="btn btn-outline slide-btn-sub">Explore Retreats</a>
+            </div>
+          </div>
+          
+          <!-- Slide Navigation Arrows -->
+          <div class="hero-controls">
+            <button class="control-arrow prev-slide" aria-label="Previous Slide">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            </button>
+            <button class="control-arrow next-slide" aria-label="Next Slide">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Side: Preview Cards Track -->
+        <div class="hero-cards-side">
+          <div class="hero-cards-track">
+            <!-- Card 1: Wellness (Active initially) -->
+            <div class="hero-card active" data-index="0">
+              <div class="card-bg" style="background-image: url('images/hero_meditation.png');"></div>
+              <div class="card-overlay"></div>
+              <div class="card-info">
+                <span class="card-category">✦ Wellness</span>
+                <h3 class="card-title">Ayurvedic Sanctuary</h3>
+              </div>
+            </div>
+            <!-- Card 2: Dining -->
+            <div class="hero-card" data-index="1">
+              <div class="card-bg" style="background-image: url('images/hero_dining.png');"></div>
+              <div class="card-overlay"></div>
+              <div class="card-info">
+                <span class="card-category">✦ Gastronomy</span>
+                <h3 class="card-title">Treetop Dining</h3>
+              </div>
+            </div>
+            <!-- Card 3: Infinity Pool -->
+            <div class="hero-card" data-index="2">
+              <div class="card-bg" style="background-image: url('images/hero_pool.png');"></div>
+              <div class="card-overlay"></div>
+              <div class="card-info">
+                <span class="card-category">✦ Hydrotherapy</span>
+                <h3 class="card-title">Infinity Sanctuary</h3>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
