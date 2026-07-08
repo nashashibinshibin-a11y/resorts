@@ -119,43 +119,34 @@ document.addEventListener('DOMContentLoaded', () => {
   const slides = document.querySelectorAll('.hero-slide');
   const cards = document.querySelectorAll('.hero-card');
   const mobileSelectorItems = document.querySelectorAll('.mobile-selector-item');
-  const prevBtn = document.querySelector('.prev-slide');
-  const nextBtn = document.querySelector('.next-slide');
   const contentWrapper = document.querySelector('.hero-content-wrapper');
   
   const slideTagline = document.querySelector('.slide-tagline');
   const slideTitle = document.querySelector('.slide-title');
   const slideDesc = document.querySelector('.slide-desc');
   const slideBtnMain = document.querySelector('.slide-btn-main');
-  const slideBtnSub = document.querySelector('.slide-btn-sub');
 
   const slideData = [
     {
       tagline: "Wellness Experience",
       title: "Luxury Wellness That Changes Your Life",
       desc: "Reconnect with yourself through immersive wellness retreats surrounded by the untouched beauty of Wayanad.",
-      btnMain: "Book Your Retreat →",
-      btnSub: "Explore Retreats",
-      linkMain: "#booking",
-      linkSub: "#cottages"
+      btnMain: "Explore Retreat",
+      linkMain: "#booking"
     },
     {
       tagline: "Culinary Experience",
       title: "Dining Above the Forest Canopy",
       desc: "Experience unforgettable evenings with curated cuisine served among the treetops and breathtaking landscapes.",
-      btnMain: "Reserve Your Table →",
-      btnSub: "Our Culinary Vision",
-      linkMain: "#booking",
-      linkSub: "#experiences"
+      btnMain: "Explore Retreat",
+      linkMain: "#booking"
     },
     {
       tagline: "Sanctuary Experience",
       title: "A Sanctuary Hidden Within Nature",
       desc: "Wake up to misty mountains, tranquil infinity pools, and luxurious suites designed for complete relaxation.",
-      btnMain: "Explore The Sanctuary →",
-      btnSub: "Explore Rooms",
-      linkMain: "#booking",
-      linkSub: "#cottages"
+      btnMain: "Explore Retreat",
+      linkMain: "#booking"
     }
   ];
 
@@ -206,10 +197,6 @@ document.addEventListener('DOMContentLoaded', () => {
         slideBtnMain.textContent = slideData[targetIdx].btnMain;
         slideBtnMain.setAttribute('href', slideData[targetIdx].linkMain);
       }
-      if (slideBtnSub) {
-        slideBtnSub.textContent = slideData[targetIdx].btnSub;
-        slideBtnSub.setAttribute('href', slideData[targetIdx].linkSub);
-      }
 
       // Fade content back in with staggered CSS delay
       if (contentWrapper) {
@@ -236,23 +223,6 @@ document.addEventListener('DOMContentLoaded', () => {
       changeSlide(targetIdx);
     });
   });
-
-  // Prev & Next arrows (Desktop)
-  if (prevBtn) {
-    prevBtn.addEventListener('click', () => {
-      let targetIdx = currentIdx - 1;
-      if (targetIdx < 0) targetIdx = slideData.length - 1;
-      changeSlide(targetIdx);
-    });
-  }
-
-  if (nextBtn) {
-    nextBtn.addEventListener('click', () => {
-      let targetIdx = currentIdx + 1;
-      if (targetIdx >= slideData.length) targetIdx = 0;
-      changeSlide(targetIdx);
-    });
-  }
 
   // --- Mobile Touch Swiping Gestures ---
   const heroSection = document.getElementById('hero');
