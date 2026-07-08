@@ -542,6 +542,27 @@ header.scrolled {
   will-change: transform;
 }
 
+/* Sanctuary experience custom backgrounds (desktop landscape vs mobile portrait) */
+#slide-sanctuary .slide-img {
+  background-image: url('images/hero_sanctuary.jpg');
+}
+
+#card-sanctuary .card-bg {
+  background-image: url('images/hero_sanctuary.jpg');
+}
+
+@media (max-width: 576px) {
+  #slide-sanctuary .slide-img {
+    background-image: url('images/hero_sanctuary_mobile.jpg');
+    background-position: center bottom; /* Adjust view focus slightly on mobile */
+  }
+  
+  #card-sanctuary .card-bg {
+    background-image: url('images/hero_sanctuary_mobile.jpg');
+    background-position: center bottom;
+  }
+}
+
 .hero-overlay {
   position: absolute;
   top: 0;
