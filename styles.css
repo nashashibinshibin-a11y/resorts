@@ -542,7 +542,15 @@ header.scrolled {
   will-change: transform;
 }
 
-/* Sanctuary experience custom backgrounds (desktop landscape vs mobile portrait) */
+/* Custom backgrounds (desktop landscape vs mobile portrait) */
+#slide-wellness .slide-img {
+  background-image: url('images/hero_wellness.jpg');
+}
+
+#card-wellness .card-bg {
+  background-image: url('images/hero_wellness.jpg');
+}
+
 #slide-sanctuary .slide-img {
   background-image: url('images/hero_sanctuary.jpg');
 }
@@ -552,6 +560,16 @@ header.scrolled {
 }
 
 @media (max-width: 576px) {
+  #slide-wellness .slide-img {
+    background-image: url('images/hero_wellness_mobile.jpg');
+    background-position: center bottom;
+  }
+  
+  #card-wellness .card-bg {
+    background-image: url('images/hero_wellness_mobile.jpg');
+    background-position: center bottom;
+  }
+
   #slide-sanctuary .slide-img {
     background-image: url('images/hero_sanctuary_mobile.jpg');
     background-position: center bottom; /* Adjust view focus slightly on mobile */
