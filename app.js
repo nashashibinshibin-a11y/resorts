@@ -127,6 +127,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (canvas) {
     const ctx = canvas.getContext('2d');
+    
+    // Set high-quality scaling algorithms on the context
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+
     const frameCount = 125;
     const frames = [];
     let loadedCount = 0;
@@ -168,17 +173,29 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const resizeCanvas = () => {
-      canvas.width = canvas.parentElement.clientWidth;
-      canvas.height = canvas.parentElement.clientHeight;
+      // Support high-density/Retina displays by scaling internal buffer with DPR
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = canvas.parentElement.clientWidth * dpr;
+      canvas.height = canvas.parentElement.clientHeight * dpr;
+      
+      // Re-enable high-quality scaling on resize (resizing resets canvas context states)
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = 'high';
+
       if (frames[Math.round(currentFrame)]) {
         drawImageCover(frames[Math.round(currentFrame)]);
       }
     };
     window.addEventListener('resize', resizeCanvas);
     
-    // Initial size setup
-    canvas.width = canvas.parentElement.clientWidth;
-    canvas.height = canvas.parentElement.clientHeight;
+    // Initial size setup with high-density DPI support
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = canvas.parentElement.clientWidth * dpr;
+    canvas.height = canvas.parentElement.clientHeight * dpr;
+    
+    // Re-enable high-quality scaling on initial load
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
 
     const checkRevealTriggers = (frameIndex) => {
       // Dynamic reveal transitions that adapt in BOTH scroll directions
