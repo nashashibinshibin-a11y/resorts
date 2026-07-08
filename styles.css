@@ -840,6 +840,16 @@ header.scrolled {
   pointer-events: none;
 }
 
+/* Cinematic Ken Burns zoom animation for active background images */
+@keyframes premiumZoom {
+  0% { transform: scale(1.04); }
+  100% { transform: scale(1.08); }
+}
+
+.hero-slide.active .slide-img {
+  animation: premiumZoom 18s ease-out forwards;
+}
+
 /* Mobile Responsive Hero Grid adjustments */
 @media (max-width: 1024px) {
   .hero-grid-layout {
@@ -869,60 +879,231 @@ header.scrolled {
 }
 
 @media (max-width: 768px) {
-  .hero-card {
-    width: 125px;
-    height: 175px;
-    border-radius: 16px;
+  /* --- Mobile-First Header Overrides --- */
+  header {
+    background-color: transparent !important;
+    backdrop-filter: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    position: absolute !important;
   }
-  .hero-card.active {
-    width: 140px;
-    height: 190px;
+
+  header .container {
+    padding: 1.5rem 24px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
   }
-  .hero-card .card-title {
-    font-size: 0.8rem;
+
+  header #book-now, 
+  header .nav-cta {
+    display: none !important; /* Remove Book Now CTA in header on mobile */
   }
-  .hero-card .card-info {
-    bottom: 12px;
-    left: 12px;
-    right: 12px;
+
+  /* --- Immersive Mobile Background & Overlays --- */
+  .hero {
+    height: 100vh !important;
+    min-height: 100vh !important;
+  }
+
+  .hero-overlay {
+    background: linear-gradient(to right, rgba(42, 39, 36, 0.75) 0%, rgba(42, 39, 36, 0.25) 60%, transparent 100%),
+                linear-gradient(to top, rgba(42, 39, 36, 0.85) 0%, rgba(42, 39, 36, 0.1) 40%, transparent 100%) !important;
+  }
+
+  .scroll-indicator {
+    display: none !important; /* Hide desktop mouse scroll indicator */
+  }
+
+  /* --- Mobile Grid Content Alignments --- */
+  .hero-container {
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important;
+    padding-bottom: 145px !important; /* Leave generous space for experience bar & swipe text */
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+
+  .hero-grid-layout {
+    display: block !important;
+    width: 100% !important;
+    margin-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .hero-text-side {
+    width: 100% !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    gap: 1.5rem !important;
+  }
+
+  .hero-content-wrapper {
+    align-items: flex-start !important;
+    text-align: left !important;
+    gap: 1rem !important;
+  }
+
+  .slide-tagline {
+    font-size: 0.75rem !important;
+    letter-spacing: 0.2em !important;
+    color: var(--color-gold) !important;
+    text-transform: uppercase !important;
+    font-weight: 600 !important;
+  }
+
+  .slide-title {
+    font-size: 2.3rem !important;
+    line-height: 1.25 !important;
+    color: var(--color-white) !important;
+    max-width: 90% !important;
+    font-weight: 300 !important;
+  }
+
+  .slide-desc {
+    font-size: 0.95rem !important;
+    line-height: 1.65 !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+    max-width: 95% !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+  }
+
+  .hero-cta {
+    display: flex !important;
+    width: 100% !important;
+    justify-content: flex-start !important;
+    margin-top: 0.5rem !important;
+  }
+
+  .hero-cta .slide-btn-sub {
+    display: none !important; /* Hide secondary outlines CTA button */
+  }
+
+  .hero-cta .slide-btn-main {
+    width: 100% !important;
+    max-width: 260px !important;
+    text-align: center !important;
+    font-size: 0.8rem !important;
+    letter-spacing: 0.15em !important;
+  }
+
+  /* Hide floating preview cards and arrows on mobile */
+  .hero-cards-side {
+    display: none !important;
+  }
+
+  .hero-controls {
+    display: none !important;
+  }
+
+  /* --- Mobile Experience Selector Tab Bar --- */
+  .mobile-experience-selector {
+    display: flex;
+    position: absolute;
+    bottom: 75px;
+    left: 24px;
+    right: 24px;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: 15px;
+  }
+  
+  .mobile-selector-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: none;
+    border: none;
+    padding: 0;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    gap: 4px;
+    flex: 1;
+  }
+  
+  .mobile-selector-item .selector-icon {
+    font-size: 1.1rem;
+    margin-bottom: 2px;
+  }
+  
+  .mobile-selector-item .selector-label {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    color: inherit;
+  }
+  
+  .mobile-selector-item .selector-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background-color: transparent;
+    margin-top: 4px;
+    transition: all 0.4s ease;
+  }
+  
+  /* Active tab indicator styles */
+  .mobile-selector-item.active {
+    color: var(--color-gold);
+    transform: scale(1.06);
+  }
+  
+  .mobile-selector-item.active .selector-dot {
+    background-color: var(--color-gold);
+    border-color: var(--color-gold);
+    box-shadow: 0 0 8px var(--color-gold);
+  }
+
+  /* --- Bottom Mobile Swipe Cues --- */
+  .mobile-swipe-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    gap: 4px;
+    pointer-events: none;
+  }
+  
+  .mobile-swipe-indicator .swipe-text {
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 500;
+  }
+  
+  .mobile-swipe-indicator .bounce-arrow {
+    color: rgba(255, 255, 255, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: gentlyBounce 2s infinite ease-in-out;
   }
 }
 
-@media (max-width: 576px) {
-  .hero-grid-layout {
-    grid-template-columns: 1fr;
-    margin-top: 4.5rem;
-    padding-bottom: 110px; /* More padding on small mobile screens */
-    gap: 1.5rem;
+@keyframes gentlyBounce {
+  0%, 100% {
+    transform: translateY(0);
   }
-  .hero-cards-side {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-  }
-  .hero-cards-track {
-    gap: 0.8rem;
-  }
-  .hero-card {
-    width: 90px;
-    height: 125px;
-    border-radius: 12px;
-  }
-  .hero-card.active {
-    width: 105px;
-    height: 140px;
-  }
-  .hero-card .card-title {
-    font-size: 0.65rem;
-  }
-  .hero-card .card-info {
-    bottom: 8px;
-    left: 8px;
-    right: 8px;
-  }
-  .hero-card .card-category {
-    font-size: 0.5rem;
-    letter-spacing: 0.05em;
+  50% {
+    transform: translateY(5px);
   }
 }
 

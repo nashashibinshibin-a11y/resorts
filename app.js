@@ -118,6 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- Interactive Hero Section Slider ---
   const slides = document.querySelectorAll('.hero-slide');
   const cards = document.querySelectorAll('.hero-card');
+  const mobileSelectorItems = document.querySelectorAll('.mobile-selector-item');
   const prevBtn = document.querySelector('.prev-slide');
   const nextBtn = document.querySelector('.next-slide');
   const contentWrapper = document.querySelector('.hero-content-wrapper');
@@ -174,17 +175,28 @@ document.addEventListener('DOMContentLoaded', () => {
     slides[currentIdx].classList.remove('active');
     slides[targetIdx].classList.add('active');
 
-    // 3. Update active card preview
-    cards[currentIdx].classList.remove('active');
-    cards[targetIdx].classList.add('active');
-
-    // Reset slide scroll translation instantly for the incoming layer
-    const nextImg = slides[targetIdx].querySelector('.slide-img');
-    if (nextImg) {
-      nextImg.style.transform = 'scale(1.05) translate3d(0, 0, 0)';
+    // 3. Update active card preview (desktop layout tabs)
+    if (cards.length > 0) {
+      cards[currentIdx].classList.remove('active');
+      cards[targetIdx].classList.add('active');
     }
 
-    // 4. Update texts and fade content back in after fade-out transition finishes (350ms)
+    // 4. Update active mobile selector items (mobile layout tabs)
+    if (mobileSelectorItems.length > 0) {
+      mobileSelectorItems[currentIdx].classList.remove('active');
+      mobileSelectorItems[targetIdx].classList.add('active');
+    }
+
+    // Reset slide scroll translation instantly for both slides to avoid parallax jumps
+    slides[currentIdx].style.transform = 'translate3d(0, 0, 0)';
+    const scrollPos = window.scrollY;
+    if (scrollPos < window.innerHeight) {
+      slides[targetIdx].style.transform = `translate3d(0, ${scrollPos * 0.15}px, 0)`;
+    } else {
+      slides[targetIdx].style.transform = 'translate3d(0, 0, 0)';
+    }
+
+    // 5. Update texts and fade content back in after fade-out transition finishes (350ms)
     setTimeout(() => {
       // Update text fields
       if (slideTagline) slideTagline.textContent = slideData[targetIdx].tagline;
@@ -209,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 380);
   };
 
-  // Click card previews to change slide
+  // Click card previews to change slide (Desktop)
   cards.forEach((card) => {
     card.addEventListener('click', () => {
       const targetIdx = parseInt(card.getAttribute('data-index'), 10);
@@ -217,7 +229,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Prev & Next arrows
+  // Tap mobile selector items to change slide (Mobile)
+  mobileSelectorItems.forEach((item) => {
+    item.addEventListener('click', () => {
+      const targetIdx = parseInt(item.getAttribute('data-index'), 10);
+      changeSlide(targetIdx);
+    });
+  });
+
+  // Prev & Next arrows (Desktop)
   if (prevBtn) {
     prevBtn.addEventListener('click', () => {
       let targetIdx = currentIdx - 1;
@@ -232,6 +252,39 @@ document.addEventListener('DOMContentLoaded', () => {
       if (targetIdx >= slideData.length) targetIdx = 0;
       changeSlide(targetIdx);
     });
+  }
+
+  // --- Mobile Touch Swiping Gestures ---
+  const heroSection = document.getElementById('hero');
+  if (heroSection) {
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    heroSection.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    heroSection.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, { passive: true });
+
+    const handleSwipe = () => {
+      const threshold = 55; // Min distance to trigger swipe
+      if (touchEndX < touchStartX - threshold) {
+        // Swipe Left -> Next Slide
+        let targetIdx = currentIdx + 1;
+        if (targetIdx >= slideData.length) targetIdx = 0;
+        changeSlide(targetIdx);
+        resetAutoPlay();
+      } else if (touchEndX > touchStartX + threshold) {
+        // Swipe Right -> Prev Slide
+        let targetIdx = currentIdx - 1;
+        if (targetIdx < 0) targetIdx = slideData.length - 1;
+        changeSlide(targetIdx);
+        resetAutoPlay();
+      }
+    };
   }
 
   // Auto-play slides every 8 seconds for dynamic feel
@@ -252,16 +305,17 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   cards.forEach(card => card.addEventListener('click', resetAutoPlay));
+  mobileSelectorItems.forEach(item => item.addEventListener('click', resetAutoPlay));
   if (prevBtn) prevBtn.addEventListener('click', resetAutoPlay);
   if (nextBtn) nextBtn.addEventListener('click', resetAutoPlay);
 
   // --- Background Image Scroll Parallax ---
   window.addEventListener('scroll', () => {
     const scrollPos = window.scrollY;
-    const activeImg = document.querySelector('.hero-slide.active .slide-img');
-    if (activeImg && scrollPos < window.innerHeight) {
-      // Sub-image slow translate for depth effect without fighting z-index crossfade
-      activeImg.style.transform = `scale(1.05) translate3d(0, ${scrollPos * 0.15}px, 0)`;
+    const activeSlide = document.querySelector('.hero-slide.active');
+    if (activeSlide && scrollPos < window.innerHeight) {
+      // Translate parent slide container for parallax scroll, allowing child slide-img to run CSS zoom scale animation
+      activeSlide.style.transform = `translate3d(0, ${scrollPos * 0.15}px, 0)`;
     }
   });
 
