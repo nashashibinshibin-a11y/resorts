@@ -9,7 +9,7 @@
   <title>Upsera Resort | Luxury Nature Sanctuary</title>
   
   <!-- CSS Stylesheet -->
-  <link rel="stylesheet" href="styles.css?v=4.7">
+  <link rel="stylesheet" href="styles.css?v=4.8">
 </head>
 <body>
 
@@ -274,78 +274,192 @@
   <!-- Featured Accommodation Section -->
   <section class="accommodation section-spacing" id="cottages">
     <div class="container">
-      <div class="accom-header reveal-group">
-        <span class="uppercase-track reveal">Exclusive Stays</span>
-        <h2 class="heading-secondary reveal">Our Private Sanctuaries</h2>
-        <p class="body-large reveal">Each accommodation is crafted from sustainable local resources and designed to offer sweeping panoramic vistas while maintaining total ecological harmony.</p>
+      
+      <!-- Editorial Section Introduction -->
+      <div class="villas-intro reveal-group">
+        <span class="villas-label reveal">LUXURY SANCTUARIES</span>
+        <h2 class="villas-title reveal">Retreats Crafted for Absolute Privacy</h2>
+        <p class="villas-desc reveal">Each sanctuary is an architectural ode to the forest's wilderness, blending natural timbers with contemporary glass designs to offer absolute seclusion and deep nature immersion.</p>
       </div>
       
-      <div class="accom-grid reveal-group">
+      <!-- Editorial Villa Item Lists -->
+      <div class="villas-list">
         
-        <!-- Cottage Card 1 -->
-        <div class="accom-card reveal">
-          <div class="accom-img-wrapper">
-            <img src="images/hero_resort.png" alt="Eco cottages on hills with private infinity pools">
-            <span class="accom-badge">Private Pool</span>
-          </div>
-          <div class="accom-content">
-            <div class="accom-meta">
-              <span>2 Guests</span>
-              <span>✦</span>
-              <span>1,500 Sq.Ft</span>
+        <!-- Villa 1: Image Left, Content Right -->
+        <div class="villa-item image-left reveal-group">
+          <div class="villa-media reveal">
+            <div class="villa-image-container">
+              <img src="images/hero_resort.png" alt="Eco cottages on hills with private infinity pools" class="villa-img">
+              <div class="villa-badges">
+                <span class="villa-badge">✦ Private Pool</span>
+                <span class="villa-badge">✦ Forest View</span>
+                <span class="villa-badge">✦ Infinity Deck</span>
+                <span class="villa-badge photo-badge">✦ 18 Photos</span>
+              </div>
             </div>
-            <h3 class="accom-title">The Canopy Villa</h3>
-            <p class="accom-desc">Perched high on the ridge line, this majestic suite features an expansive hardwood deck, a private plunge pool, and panoramic sunset views over the mountain peaks.</p>
-            <div class="accom-footer">
-              <div class="accom-price">From <span>₹28,000</span>/night</div>
-              <a href="#booking" class="link-gold-underline">Reserve Suite</a>
+          </div>
+          <div class="villa-content reveal">
+            <span class="villa-subtitle">Ridge-Line Panoramic Suite</span>
+            <h3 class="villa-name">The Canopy Villa</h3>
+            <div class="villa-meta">
+              <div class="meta-item">
+                <svg class="meta-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+                <span>2 Guests</span>
+              </div>
+              <div class="meta-divider"></div>
+              <div class="meta-item">
+                <svg class="meta-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v16.5m0-16.5h16.5m-16.5 0L19.5 19.5m0-15.75v15.75m0-15.75H3.75"/></svg>
+                <span>1,500 Sq.Ft</span>
+              </div>
+            </div>
+            <p class="villa-description">Perched high on the ridge line, this majestic suite features an expansive hardwood deck, a private plunge pool, and panoramic sunset views over the mountain peaks.</p>
+            <div class="villa-amenities">
+              <div class="amenity-tag">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z"/></svg>
+                <span>Private Infinity Pool</span>
+              </div>
+              <div class="amenity-tag">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.502 4.502 0 002.25 15z"/></svg>
+                <span>Mountain View</span>
+              </div>
+              <div class="amenity-tag">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18M3 12h18"/></svg>
+                <span>Breakfast Included</span>
+              </div>
+              <div class="amenity-tag">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+                <span>Butler Service</span>
+              </div>
+            </div>
+            <div class="villa-price-box">
+              <span class="price-label">Starting from</span>
+              <div class="price-amount">₹28,000 <span class="price-unit">per night</span></div>
+            </div>
+            <a href="#booking" class="btn btn-gold booking-submit villa-cta">Reserve Your Stay</a>
+          </div>
+        </div>
+
+        <!-- Villa 2: Content Left, Image Right -->
+        <div class="villa-item content-left reveal-group">
+          <div class="villa-content reveal">
+            <span class="villa-subtitle">Teak & Glass Forest Haven</span>
+            <h3 class="villa-name">The Mist-View Sanctuary</h3>
+            <div class="villa-meta">
+              <div class="meta-item">
+                <svg class="meta-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+                <span>2 Guests</span>
+              </div>
+              <div class="meta-divider"></div>
+              <div class="meta-item">
+                <svg class="meta-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v16.5m0-16.5h16.5m-16.5 0L19.5 19.5m0-15.75v15.75m0-15.75H3.75"/></svg>
+                <span>1,200 Sq.Ft</span>
+              </div>
+            </div>
+            <p class="villa-description">Designed with floor-to-ceiling glass paneling and warm organic teak wood, this forest sanctuary captures the soft morning mist rolling across the rainforest floor.</p>
+            <div class="villa-amenities">
+              <div class="amenity-tag">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z"/></svg>
+                <span>Private Hot Tub</span>
+              </div>
+              <div class="amenity-tag">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.502 4.502 0 002.25 15z"/></svg>
+                <span>Jungle Canopy View</span>
+              </div>
+              <div class="amenity-tag">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18M3 12h18"/></svg>
+                <span>Breakfast Included</span>
+              </div>
+              <div class="amenity-tag">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+                <span>Concierge Care</span>
+              </div>
+            </div>
+            <div class="villa-price-box">
+              <span class="price-label">Starting from</span>
+              <div class="price-amount">₹24,000 <span class="price-unit">per night</span></div>
+            </div>
+            <a href="#booking" class="btn btn-gold booking-submit villa-cta">Reserve Your Stay</a>
+          </div>
+          <div class="villa-media reveal">
+            <div class="villa-image-container">
+              <img src="images/villa_interior.png" alt="Teak wood cottage interior bedroom" class="villa-img">
+              <div class="villa-badges">
+                <span class="villa-badge">✦ Jungle View</span>
+                <span class="villa-badge">✦ Glass Canopy</span>
+                <span class="villa-badge">✦ Outdoor Shower</span>
+                <span class="villa-badge photo-badge">✦ 12 Photos</span>
+              </div>
             </div>
           </div>
         </div>
-        
-        <!-- Cottage Card 2 -->
-        <div class="accom-card reveal">
-          <div class="accom-img-wrapper">
-            <img src="images/villa_interior.png" alt="Teak wood cottage interior bedroom">
-            <span class="accom-badge">Jungle View</span>
+
+        <!-- Villa 3: Image Left, Content Right -->
+        <div class="villa-item image-left reveal-group">
+          <div class="villa-media reveal">
+            <div class="villa-image-container">
+              <img src="images/infinity_pool.png" alt="Infinity pool overlooking the mountains" class="villa-img">
+              <div class="villa-badges">
+                <span class="villa-badge">✦ Mountain View</span>
+                <span class="villa-badge">✦ Outdoor Bath</span>
+                <span class="villa-badge">✦ Direct Trail Access</span>
+                <span class="villa-badge photo-badge">✦ 15 Photos</span>
+              </div>
+            </div>
           </div>
-          <div class="accom-content">
-            <div class="accom-meta">
-              <span>2 Guests</span>
-              <span>✦</span>
-              <span>1,200 Sq.Ft</span>
+          <div class="villa-content reveal">
+            <span class="villa-subtitle">Spice Garden Secluded Haven</span>
+            <h3 class="villa-name">The Forest Haven</h3>
+            <div class="villa-meta">
+              <div class="meta-item">
+                <svg class="meta-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+                <span>2 Guests</span>
+              </div>
+              <div class="meta-divider"></div>
+              <div class="meta-item">
+                <svg class="meta-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v16.5m0-16.5h16.5m-16.5 0L19.5 19.5m0-15.75v15.75m0-15.75H3.75"/></svg>
+                <span>1,100 Sq.Ft</span>
+              </div>
             </div>
-            <h3 class="accom-title">The Mist-View Sanctuary</h3>
-            <p class="accom-desc">Designed with floor-to-ceiling glass paneling and warm organic teak wood, this forest sanctuary captures the soft morning mist rolling across the rainforest floor.</p>
-            <div class="accom-footer">
-              <div class="accom-price">From <span>₹24,000</span>/night</div>
-              <a href="#booking" class="link-gold-underline">Reserve Suite</a>
+            <p class="villa-description">Tucked away in the spice gardens, the haven features an open-concept stone bath, private terrace pathways, and a serene direct connection to nature walking trails.</p>
+            <div class="villa-amenities">
+              <div class="amenity-tag">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z"/></svg>
+                <span>Stone Bath Tub</span>
+              </div>
+              <div class="amenity-tag">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.502 4.502 0 002.25 15z"/></svg>
+                <span>Hill Side View</span>
+              </div>
+              <div class="amenity-tag">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18M3 12h18"/></svg>
+                <span>Breakfast Included</span>
+              </div>
+              <div class="amenity-tag">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+                <span>Organic Garden Access</span>
+              </div>
             </div>
+            <div class="villa-price-box">
+              <span class="price-label">Starting from</span>
+              <div class="price-amount">₹22,000 <span class="price-unit">per night</span></div>
+            </div>
+            <a href="#booking" class="btn btn-gold booking-submit villa-cta">Reserve Your Stay</a>
           </div>
         </div>
-        
-        <!-- Cottage Card 3 -->
-        <div class="accom-card reveal">
-          <div class="accom-img-wrapper">
-            <img src="images/infinity_pool.png" alt="Infinity pool overlooking the mountains">
-            <span class="accom-badge">Mountain View</span>
-          </div>
-          <div class="accom-content">
-            <div class="accom-meta">
-              <span>2 Guests</span>
-              <span>✦</span>
-              <span>1,100 Sq.Ft</span>
-            </div>
-            <h3 class="accom-title">The Forest Haven</h3>
-            <p class="accom-desc">Tucked away in the spice gardens, the haven features an open-concept stone bath, private terrace pathways, and a serene direct connection to nature walking trails.</p>
-            <div class="accom-footer">
-              <div class="accom-price">From <span>₹22,000</span>/night</div>
-              <a href="#booking" class="link-gold-underline">Reserve Suite</a>
-            </div>
-          </div>
-        </div>
-        
+
       </div>
+
+      <!-- Luxury End of Section CTA Block -->
+      <div class="villas-footer reveal">
+        <div class="villas-footer-bg" style="background-image: url('images/hero_resort.png');"></div>
+        <div class="villas-footer-overlay"></div>
+        <div class="villas-footer-content">
+          <h3 class="villas-footer-title">Every Stay is Designed Around You</h3>
+          <p class="villas-footer-desc">Experience tailormade wilderness programs, bespoke treetop dining options, and individualised ayurvedic wellness treatments curated by our resident guides and therapists.</p>
+          <a href="#booking" class="btn btn-gold booking-submit villas-footer-btn">Explore All Retreats</a>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -625,6 +739,6 @@
   </div>
 
   <!-- Client Script -->
-  <script src="app.js?v=4.7"></script>
+  <script src="app.js?v=4.8"></script>
 </body>
 </html>
