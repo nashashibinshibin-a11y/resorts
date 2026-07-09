@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- Interactive Hero Section Slider ---
   const slides = document.querySelectorAll('.hero-slide');
   const cards = document.querySelectorAll('.hero-card');
-  const mobileSelectorItems = document.querySelectorAll('.mobile-selector-item');
+  const mobileSelectorItems = document.querySelectorAll('.mobile-progress-line');
   const contentWrapper = document.querySelector('.hero-content-wrapper');
   
   const slideTagline = document.querySelector('.slide-tagline');
@@ -216,13 +216,36 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Tap mobile selector items to change slide (Mobile)
+  // Tap mobile progress indicators to change slide (Mobile)
   mobileSelectorItems.forEach((item) => {
     item.addEventListener('click', () => {
       const targetIdx = parseInt(item.getAttribute('data-index'), 10);
       changeSlide(targetIdx);
+      resetAutoPlay();
     });
   });
+
+  // Tap mobile Previous / Next buttons to change slide (Mobile)
+  const mobilePrevBtn = document.querySelector('.mobile-nav-btn.prev');
+  const mobileNextBtn = document.querySelector('.mobile-nav-btn.next');
+
+  if (mobilePrevBtn) {
+    mobilePrevBtn.addEventListener('click', () => {
+      let targetIdx = currentIdx - 1;
+      if (targetIdx < 0) targetIdx = slideData.length - 1;
+      changeSlide(targetIdx);
+      resetAutoPlay();
+    });
+  }
+
+  if (mobileNextBtn) {
+    mobileNextBtn.addEventListener('click', () => {
+      let targetIdx = currentIdx + 1;
+      if (targetIdx >= slideData.length) targetIdx = 0;
+      changeSlide(targetIdx);
+      resetAutoPlay();
+    });
+  }
 
   // --- Mobile Touch Swiping Gestures ---
   const heroSection = document.getElementById('hero');

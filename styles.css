@@ -1154,73 +1154,77 @@ header.scrolled {
     display: none !important;
   }
 
-  /* --- Mobile Experience Selector Tab Bar --- */
-  .mobile-experience-selector {
-    display: flex;
-    position: absolute;
-    bottom: 75px;
-    left: 24px;
-    right: 24px;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 10;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-    padding-top: 15px;
+  .hero-cta .slide-btn-main::after {
+    content: ' →' !important;
+    display: inline-block !important;
+    margin-left: 8px !important;
+    transition: transform 0.3s ease !important;
   }
-  
-  .mobile-selector-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: none;
-    border: none;
-    padding: 0;
-    color: rgba(255, 255, 255, 0.5);
-    cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-    gap: 4px;
-    flex: 1;
+
+  /* Hide floating preview cards and arrows on mobile */
+  .hero-cards-side {
+    display: none !important;
   }
-  
-  .mobile-selector-item .selector-icon {
-    font-size: 1.1rem;
-    margin-bottom: 2px;
-    color: inherit;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+  .hero-controls {
+    display: none !important;
   }
-  
-  .mobile-selector-item .selector-label {
-    font-family: var(--font-sans);
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    font-weight: 500;
-    color: inherit;
-    margin-top: 2px;
+
+  /* --- Mobile Slider Navigation Controls --- */
+  .mobile-slider-navigation {
+    display: flex !important;
+    position: absolute !important;
+    bottom: 45px !important; /* sit just above the next section, leaving breathing space */
+    left: 24px !important;
+    right: 24px !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    z-index: 10 !important;
   }
-  
-  .mobile-selector-item .selector-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.45);
-    background-color: transparent;
-    margin-top: 8px;
-    transition: all 0.4s ease;
+
+  .mobile-nav-btn {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 50% !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    color: var(--color-white) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    outline: none !important;
+    padding: 0 !important;
   }
-  
-  /* Active tab indicator styles */
-  .mobile-selector-item.active {
-    color: var(--color-gold);
-    transform: scale(1.06);
+
+  .mobile-nav-btn:active {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    border-color: rgba(255, 255, 255, 0.5) !important;
+    transform: scale(0.95) !important;
   }
-  
-  .mobile-selector-item.active .selector-dot {
-    background-color: var(--color-gold);
-    border-color: var(--color-gold);
-    box-shadow: none; /* Solid circle with no shadow glow */
+
+  .mobile-nav-btn svg {
+    display: block !important;
+  }
+
+  .mobile-progress-indicators {
+    display: flex !important;
+    gap: 8px !important;
+    align-items: center !important;
+  }
+
+  .mobile-progress-line {
+    width: 32px !important;
+    height: 2px !important;
+    background-color: rgba(255, 255, 255, 0.3) !important;
+    cursor: pointer !important;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  .mobile-progress-line.active {
+    background-color: var(--color-gold) !important;
+    width: 48px !important; /* expand active line slightly */
   }
 
   /* --- Bottom Mobile Swipe Cues --- */
