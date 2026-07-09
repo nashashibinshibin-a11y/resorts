@@ -9,7 +9,7 @@
   <title>Upsera Resort | Luxury Nature Sanctuary</title>
   
   <!-- CSS Stylesheet -->
-  <link rel="stylesheet" href="styles.css?v=4.6">
+  <link rel="stylesheet" href="styles.css?v=4.7">
 </head>
 <body>
 
@@ -183,58 +183,64 @@
       <div class="benefit-item">
         <div class="benefit-icon">✦</div>
         <div class="benefit-text">
-          <strong>World-Class Experts</strong>
+          <strong>Wellness Experiences</strong>
           <span>Acharyas & healers</span>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Quick Booking Widget Bar -->
-  <div class="booking-bar-wrapper" id="booking">
+  <!-- Dedicated Booking Section -->
+  <section class="booking-section" id="booking">
     <div class="container">
-      <form class="booking-bar booking-form-trigger reveal">
-        <div class="booking-field">
-          <label for="checkin">Check-In</label>
-          <div class="booking-input-wrapper">
-            <input type="date" id="checkin" class="checkin-date" required>
-          </div>
+      <div class="booking-container reveal">
+        <div class="booking-header">
+          <h2 class="booking-title">Plan Your Retreat</h2>
+          <p class="booking-caption">Reserve your luxury sanctuary in Wayanad.</p>
         </div>
-        
-        <div class="booking-field">
-          <label for="checkout">Check-Out</label>
-          <div class="booking-input-wrapper">
-            <input type="date" id="checkout" class="checkout-date" required>
+        <form class="booking-bar booking-form-trigger">
+          <div class="booking-field">
+            <label for="checkin">Check-In</label>
+            <div class="booking-input-wrapper">
+              <input type="date" id="checkin" class="checkin-date" required>
+            </div>
           </div>
-        </div>
-        
-        <div class="booking-field">
-          <label for="guests">Guests</label>
-          <div class="booking-input-wrapper">
-            <select id="guests" class="guest-count">
-              <option value="1 Guest">1 Guest</option>
-              <option value="2 Guests" selected>2 Guests</option>
-              <option value="3 Guests">3 Guests</option>
-              <option value="4+ Guests">4+ Guests (Family)</option>
-            </select>
+          
+          <div class="booking-field">
+            <label for="checkout">Check-Out</label>
+            <div class="booking-input-wrapper">
+              <input type="date" id="checkout" class="checkout-date" required>
+            </div>
           </div>
-        </div>
-        
-        <div class="booking-field">
-          <label for="cottage">Sanctuary Type</label>
-          <div class="booking-input-wrapper">
-            <select id="cottage" class="room-category">
-              <option value="The Canopy Villa">The Canopy Villa</option>
-              <option value="The Mist-View Sanctuary">The Mist-View Sanctuary</option>
-              <option value="The Forest Haven">The Forest Haven</option>
-            </select>
+          
+          <div class="booking-field">
+            <label for="guests">Guests</label>
+            <div class="booking-input-wrapper">
+              <select id="guests" class="guest-count">
+                <option value="1 Guest">1 Guest</option>
+                <option value="2 Guests" selected>2 Guests</option>
+                <option value="3 Guests">3 Guests</option>
+                <option value="4+ Guests">4+ Guests (Family)</option>
+              </select>
+            </div>
           </div>
-        </div>
-        
-        <button type="submit" class="btn btn-gold">Check Availability</button>
-      </form>
+          
+          <div class="booking-field">
+            <label for="cottage">Sanctuary Type</label>
+            <div class="booking-input-wrapper">
+              <select id="cottage" class="room-category">
+                <option value="The Canopy Villa">The Canopy Villa</option>
+                <option value="The Mist-View Sanctuary">The Mist-View Sanctuary</option>
+                <option value="The Forest Haven">The Forest Haven</option>
+              </select>
+            </div>
+          </div>
+          
+          <button type="submit" class="btn btn-gold booking-submit">Check Availability</button>
+        </form>
+      </div>
     </div>
-  </div>
+  </section>
 
   <!-- Resort Introduction Section -->
   <section class="intro section-spacing bg-gradient-radial" id="about">
@@ -619,6 +625,6 @@
   </div>
 
   <!-- Client Script -->
-  <script src="app.js?v=4.6"></script>
+  <script src="app.js?v=4.7"></script>
 </body>
 </html>

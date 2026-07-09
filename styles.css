@@ -962,7 +962,7 @@ header.scrolled {
     gap: 1.2rem !important;
     padding: 1.8rem 1.8rem !important;
   }
-  .booking-bar .btn-gold {
+  .booking-bar .booking-submit {
     grid-column: span 2 !important; /* button spans full columns width */
   }
   .benefits-grid {
@@ -1405,77 +1405,133 @@ header.scrolled {
 }
 
 
-/* --- Horizontal Booking Panel --- */
-.booking-bar-wrapper {
-  position: relative;
-  margin-top: -65px;
-  z-index: 10;
-  padding: 0 var(--spacing-md);
+/* --- Dedicated Booking Section --- */
+.booking-section {
+  background-color: #F8F5EF !important; /* soft warm background */
+  padding: 4rem 0 !important; /* vertical spacing */
+  width: 100% !important;
+  position: relative !important;
 }
 
+.booking-container {
+  background-color: #ffffff !important;
+  border-radius: 24px !important; /* rounded corners 20-24px */
+  box-shadow: 0 15px 40px rgba(47, 42, 39, 0.06) !important; /* subtle shadow */
+  padding: 3rem !important; /* generous internal padding */
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+}
+
+.booking-header {
+  text-align: center !important;
+  margin-bottom: 2.5rem !important;
+}
+
+.booking-title {
+  font-family: var(--font-serif) !important;
+  font-size: 2.2rem !important;
+  font-weight: 300 !important;
+  color: var(--color-charcoal) !important;
+  margin-bottom: 0.5rem !important;
+  letter-spacing: -0.01em !important;
+}
+
+.booking-caption {
+  font-family: var(--font-sans) !important;
+  font-size: 0.95rem !important;
+  color: #8C847E !important;
+  margin: 0 !important;
+}
+
+/* Form Styles */
 .booking-bar {
-  background-color: var(--color-glass-dark);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(200, 169, 106, 0.25);
-  border-radius: var(--border-radius-sm);
-  padding: 1.8rem 2.5rem;
-  box-shadow: 0 30px 60px rgba(42, 39, 36, 0.25);
-  display: grid;
-  grid-template-columns: repeat(4, 1fr) auto;
-  gap: var(--spacing-lg);
-  align-items: end;
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) auto !important;
+  gap: var(--spacing-lg) !important;
+  align-items: end !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 
 .booking-field {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
 }
 
 .booking-field label {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: var(--color-gold);
-  font-weight: 600;
+  font-size: 0.72rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.2em !important;
+  color: #8C847E !important; /* soft label color */
+  font-weight: 600 !important;
 }
 
 .booking-input-wrapper {
-  position: relative;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-  padding-bottom: 8px;
-  transition: var(--transition-smooth);
+  position: relative !important;
+  border-bottom: 1px solid rgba(47, 42, 39, 0.15) !important; /* dark border line */
+  padding-bottom: 8px !important;
+  transition: all 0.3s ease !important;
+  width: 100% !important;
 }
 
 .booking-input-wrapper:hover,
 .booking-input-wrapper:focus-within {
-  border-color: var(--color-gold);
+  border-color: var(--color-gold) !important;
 }
 
 .booking-field input,
 .booking-field select {
-  width: 100%;
-  color: #ffffff;
-  font-size: 0.9rem;
-  font-weight: 400;
-  letter-spacing: 0.03em;
+  width: 100% !important;
+  color: var(--color-charcoal) !important; /* dark text for contrast on light bg */
+  font-size: 0.95rem !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.03em !important;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  padding: 0 !important;
 }
 
 .booking-field select option {
-  background-color: var(--color-forest);
-  color: #ffffff;
+  background-color: #ffffff !important;
+  color: var(--color-charcoal) !important;
 }
 
 .booking-field input[type="date"]::-webkit-calendar-picker-indicator {
-  filter: invert(0.8) sepia(50%) saturate(1000%) hue-rotate(330deg);
+  filter: invert(0.2) sepia(20%) saturate(100%) hue-rotate(20deg) !important;
   cursor: pointer;
   opacity: 0.7;
 }
 
-.booking-bar .btn-gold {
-  height: 52px;
-  width: 100%;
+.booking-submit {
+  height: 56px !important; /* height around 56px */
+  border-radius: 8px !important;
+  background-color: var(--color-gold) !important;
+  border: 1px solid var(--color-gold) !important;
+  color: var(--color-white) !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.15em !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  padding: 0 2.2rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.booking-submit:hover {
+  background-color: #a38c6b !important;
+  border-color: #a38c6b !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 5px 15px rgba(184, 154, 103, 0.25) !important;
 }
 
 
@@ -2486,14 +2542,69 @@ header.scrolled {
     gap: var(--spacing-sm);
   }
   
-  .booking-bar {
-    grid-template-columns: 1fr;
-    gap: var(--spacing-md);
-    padding: 1.8rem 1.8rem;
+  /* --- Mobile Booking Section Overrides --- */
+  .booking-section {
+    padding: 3.5rem 0 !important; /* top and bottom whitespace */
+    background-color: #F8F5EF !important;
   }
-  
-  .booking-bar .btn-gold {
-    grid-column: span 1;
+
+  .booking-container {
+    padding: 2.2rem 1.8rem !important; /* generous mobile padding */
+    border-radius: 20px !important; /* rounded corners */
+    box-shadow: 0 10px 30px rgba(47, 42, 39, 0.04) !important;
+  }
+
+  .booking-title {
+    font-size: 1.8rem !important;
+  }
+
+  .booking-caption {
+    font-size: 0.85rem !important;
+  }
+
+  .booking-bar {
+    grid-template-columns: 1fr !important; /* convert to single-column layout */
+    gap: 20px !important; /* 20-24px spacing between fields */
+    width: 100% !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .booking-field {
+    gap: 10px !important; /* spacing label -> input */
+  }
+
+  .booking-input-wrapper {
+    height: 56px !important; /* at least 56px tall */
+    border: 1px solid rgba(47, 42, 39, 0.12) !important; /* soft borders */
+    border-radius: 8px !important; /* elegant rounded corners */
+    padding: 0 1.2rem !important;
+    display: flex !important;
+    align-items: center !important;
+    background-color: #FAF9F6 !important;
+    box-sizing: border-box !important;
+  }
+
+  .booking-field input,
+  .booking-field select {
+    font-size: 0.9rem !important;
+    height: 100% !important;
+  }
+
+  .booking-submit {
+    width: 100% !important; /* full-width button */
+    grid-column: span 1 !important;
+    height: 56px !important; /* at least 56px tall */
+    border-radius: 8px !important;
+    margin-top: 8px !important; /* extra spacing before button */
+  }
+
+  #about {
+    padding-top: 4rem !important; /* exactly 64px whitespace before the intro section */
   }
   
   .accom-grid {
