@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   ];
 
-  let currentIdx = 0;
+  let currentIdx = 1;
   let isTransitioning = false;
 
   const changeSlide = (targetIdx) => {
