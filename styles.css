@@ -1124,41 +1124,29 @@ header.scrolled {
     max-width: 230px !important; /* keep button width around 220-240px */
     height: 56px !important; /* 56-60px height */
     border-radius: 999px !important; /* premium pill shape */
-    background-color: #55504B !important; /* warm stone filled */
-    border: 1px solid #55504B !important;
-    color: #FAF9F6 !important;
+    background-color: var(--color-gold) !important; /* brand gold color */
+    border: 1px solid var(--color-gold) !important;
+    color: var(--color-white) !important;
     text-decoration: none !important;
+    text-transform: uppercase !important;
     font-weight: 500 !important;
     letter-spacing: 0.18em !important;
-    font-size: 0.8rem !important;
+    font-size: 0.75rem !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    padding: 0 2rem !important; /* increased horizontal padding */
+    box-shadow: 0 4px 15px rgba(141, 123, 96, 0.15) !important; /* subtle shadow */
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
   }
 
   .hero-cta .slide-btn-main:active {
-    transform: scale(0.97) !important; /* slight scale press animation */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+    transform: scale(0.98) !important; /* gentle scale down */
+    opacity: 0.9 !important; /* opacity transition */
+    box-shadow: 0 2px 8px rgba(141, 123, 96, 0.1) !important;
     background-color: var(--color-gold) !important;
     border-color: var(--color-gold) !important;
-    color: #242220 !important;
-  }
-
-  /* Hide floating preview cards and arrows on mobile */
-  .hero-cards-side {
-    display: none !important;
-  }
-
-  .hero-controls {
-    display: none !important;
-  }
-
-  .hero-cta .slide-btn-main::after {
-    content: ' →' !important;
-    display: inline-block !important;
-    margin-left: 8px !important;
-    transition: transform 0.3s ease !important;
+    color: var(--color-white) !important;
   }
 
   /* Hide floating preview cards and arrows on mobile */
