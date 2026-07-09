@@ -299,8 +299,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   cards.forEach(card => card.addEventListener('click', resetAutoPlay));
   mobileSelectorItems.forEach(item => item.addEventListener('click', resetAutoPlay));
-  if (prevBtn) prevBtn.addEventListener('click', resetAutoPlay);
-  if (nextBtn) nextBtn.addEventListener('click', resetAutoPlay);
 
   // --- Background Image Scroll Parallax ---
   window.addEventListener('scroll', () => {
