@@ -1018,14 +1018,17 @@ header.scrolled {
 
   /* --- Immersive Mobile Background & Overlays --- */
   .hero {
-    height: 100vh !important;
-    min-height: 100vh !important;
+    height: 90vh !important; /* reduced mobile hero height to around 88-90vh */
+    min-height: 90vh !important;
     width: 100% !important;
     overflow: hidden !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
   }
 
   .hero-overlay {
-    background: linear-gradient(to top, rgba(36, 34, 32, 0.7) 0%, rgba(36, 34, 32, 0.4) 35%, transparent 70%) !important; /* subtle dark gradient only behind text */
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.15) 50%, transparent 100%),
+                linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.2) 40%, transparent 100%) !important; /* left-to-right and bottom gradient only behind text */
   }
 
   .scroll-indicator {
@@ -1038,7 +1041,7 @@ header.scrolled {
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-start !important; /* position content from top offset */
-    padding-top: 38vh !important; /* shifted upward by ~12% from 50vh */
+    padding-top: 24vh !important; /* sit exactly at visual center (moved 12-15% upward) */
     padding-bottom: 0 !important;
     padding-left: 24px !important; /* generous left padding */
     padding-right: 24px !important;
@@ -1050,6 +1053,7 @@ header.scrolled {
     display: block !important;
     width: 100% !important;
     margin-top: 0 !important;
+    padding-top: 0 !important; /* override global padding-top to prevent gaps above hero */
     padding-bottom: 0 !important;
   }
 
@@ -1101,7 +1105,7 @@ header.scrolled {
     -webkit-box-orient: vertical !important;
     overflow: hidden !important;
     margin: 0 !important;
-    margin-bottom: 2.0rem !important; /* exactly 32px spacing description -> button */
+    margin-bottom: 1.9rem !important; /* exactly 28-32px spacing description -> button */
   }
 
   .hero-cta {
