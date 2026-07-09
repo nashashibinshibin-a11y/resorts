@@ -1025,8 +1025,7 @@ header.scrolled {
   }
 
   .hero-overlay {
-    background: linear-gradient(to right, rgba(36, 34, 32, 0.45) 0%, transparent 70%),
-                linear-gradient(to top, rgba(36, 34, 32, 0.65) 0%, rgba(36, 34, 32, 0.1) 40%, transparent 100%) !important; /* Soft left and bottom gradient only */
+    background: linear-gradient(to top, rgba(36, 34, 32, 0.7) 0%, rgba(36, 34, 32, 0.4) 35%, transparent 70%) !important; /* subtle dark gradient only behind text */
   }
 
   .scroll-indicator {
@@ -1038,10 +1037,11 @@ header.scrolled {
     height: 100% !important;
     display: flex !important;
     flex-direction: column !important;
-    justify-content: flex-end !important;
-    padding-bottom: 14vh !important; /* sit content in lower-middle area of screen */
-    padding-left: 32px !important; /* aligned with more breathing padding */
-    padding-right: 32px !important;
+    justify-content: flex-start !important; /* position content from top offset */
+    padding-top: 50vh !important; /* sit exactly at lower-middle portion (moved 18-20% downward) */
+    padding-bottom: 0 !important;
+    padding-left: 24px !important; /* generous left padding */
+    padding-right: 24px !important;
     width: 100% !important;
     box-sizing: border-box !important;
   }
@@ -1062,6 +1062,7 @@ header.scrolled {
 
   .hero-content-wrapper {
     width: 100% !important;
+    max-width: 80% !important; /* limit text container to ~80% of screen width */
     align-items: flex-start !important; /* aligned perfectly left */
     text-align: left !important;
     display: flex !important;
@@ -1079,8 +1080,8 @@ header.scrolled {
   }
 
   .slide-title {
-    font-size: 3.1rem !important; /* increased heading size by ~25% */
-    line-height: 1.22 !important;
+    font-size: 3.4rem !important; /* increased heading size by ~25% */
+    line-height: 1.25 !important;
     color: var(--color-white) !important;
     max-width: 290px !important; /* reduced max width to force 2-3 line wraps */
     font-weight: 300 !important;
@@ -1090,8 +1091,8 @@ header.scrolled {
   }
 
   .slide-desc {
-    font-size: 1.15rem !important; /* slightly increased size */
-    line-height: 1.8 !important; /* comfortable line height */
+    font-size: 1.18rem !important; /* slightly increased size */
+    line-height: 1.85 !important; /* comfortable line height */
     color: #ffffff !important; /* pure white text */
     opacity: 0.95 !important; /* increased paragraph opacity/contrast */
     max-width: 320px !important; /* max paragraph width of about 320px */
@@ -1116,7 +1117,7 @@ header.scrolled {
 
   .hero-cta .slide-btn-main {
     width: 100% !important;
-    max-width: 260px !important;
+    max-width: 230px !important; /* keep button width around 220-240px */
     height: 56px !important; /* 56-60px height */
     border-radius: 999px !important; /* premium pill shape */
     background-color: #55504B !important; /* warm stone filled */
@@ -2328,22 +2329,23 @@ footer {
   
   .nav-close {
     position: absolute;
-    top: 24px;
-    right: 24px;
-    width: 24px;
-    height: 24px;
+    top: 2.2rem; /* aligned vertically with header padding */
+    right: 32px; /* aligned horizontally with header padding */
+    width: 48px; /* increased tap area to 48x48px */
+    height: 48px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 1002; /* sit permanently visible at top-right */
   }
   
   .nav-close::before,
   .nav-close::after {
     content: '';
     position: absolute;
-    width: 20px;
-    height: 1px;
+    width: 28px; /* close cross size 28px */
+    height: 2px; /* thicker visual lines */
     background-color: var(--color-white);
   }
   
