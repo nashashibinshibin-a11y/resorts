@@ -1038,7 +1038,7 @@ header.scrolled {
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-start !important; /* position content from top offset */
-    padding-top: 50vh !important; /* sit exactly at lower-middle portion (moved 18-20% downward) */
+    padding-top: 38vh !important; /* shifted upward by ~12% from 50vh */
     padding-bottom: 0 !important;
     padding-left: 24px !important; /* generous left padding */
     padding-right: 24px !important;
@@ -1101,7 +1101,7 @@ header.scrolled {
     -webkit-box-orient: vertical !important;
     overflow: hidden !important;
     margin: 0 !important;
-    margin-bottom: 2.5rem !important; /* Whitespace description -> button */
+    margin-bottom: 2.0rem !important; /* exactly 32px spacing description -> button */
   }
 
   .hero-cta {
