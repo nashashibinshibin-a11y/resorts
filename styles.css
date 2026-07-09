@@ -962,7 +962,7 @@ header.scrolled {
   }
 
   header .container {
-    padding: 2.2rem 24px 1.5rem 24px !important; /* Increased top padding slightly for notch screen buffer */
+    padding: 2.2rem 32px 1.5rem 32px !important; /* Increased horizontal padding */
     display: flex !important;
     justify-content: space-between !important;
     align-items: center !important;
@@ -978,8 +978,8 @@ header.scrolled {
 
   header .btn-nav {
     display: inline-flex !important;
-    padding: 0.5rem 1.2rem !important;
-    font-size: 0.7rem !important;
+    padding: 0.4rem 0.9rem !important; /* reduced padding/width */
+    font-size: 0.65rem !important; /* reduced font size */
     letter-spacing: 0.15em !important;
     border-radius: 50px !important;
     height: auto !important;
@@ -1002,14 +1002,31 @@ header.scrolled {
     display: none !important; /* Hide old duplicate ids */
   }
 
+  header.scrolled {
+    width: 100% !important;
+    left: 0 !important;
+    transform: none !important;
+    top: 0 !important;
+    border-radius: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    padding: 2.2rem 32px 1.5rem 32px !important; /* keep layout identical scrolled or static */
+  }
+
   /* --- Immersive Mobile Background & Overlays --- */
   .hero {
     height: 100vh !important;
     min-height: 100vh !important;
+    width: 100% !important;
+    overflow: hidden !important;
   }
 
   .hero-overlay {
-    background: linear-gradient(to top, rgba(36, 34, 32, 0.75) 0%, rgba(36, 34, 32, 0.2) 50%, transparent 100%) !important; /* Soft bottom gradient only */
+    background: linear-gradient(to right, rgba(36, 34, 32, 0.45) 0%, transparent 70%),
+                linear-gradient(to top, rgba(36, 34, 32, 0.65) 0%, rgba(36, 34, 32, 0.1) 40%, transparent 100%) !important; /* Soft left and bottom gradient only */
   }
 
   .scroll-indicator {
@@ -1022,9 +1039,11 @@ header.scrolled {
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-end !important;
-    padding-bottom: 22vh !important; /* shifted content upward to sit in lower-middle portion */
-    padding-left: 24px !important;
-    padding-right: 24px !important;
+    padding-bottom: 14vh !important; /* sit content in lower-middle area of screen */
+    padding-left: 32px !important; /* aligned with more breathing padding */
+    padding-right: 32px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .hero-grid-layout {
@@ -1056,31 +1075,32 @@ header.scrolled {
     color: var(--color-gold) !important;
     text-transform: uppercase !important;
     font-weight: 600 !important;
-    margin-bottom: 1.2rem !important; /* Whitespace category label -> heading */
+    margin-bottom: 1.6rem !important; /* Whitespace category label -> heading */
   }
 
   .slide-title {
-    font-size: 2.75rem !important; /* increased heading size ~20% */
-    line-height: 1.25 !important;
+    font-size: 3.1rem !important; /* increased heading size by ~25% */
+    line-height: 1.22 !important;
     color: var(--color-white) !important;
-    max-width: 90% !important;
+    max-width: 290px !important; /* reduced max width to force 2-3 line wraps */
     font-weight: 300 !important;
     margin: 0 !important;
-    margin-bottom: 1.5rem !important; /* Whitespace heading -> description */
-    letter-spacing: -0.01em !important;
+    margin-bottom: 1.8rem !important; /* Whitespace heading -> paragraph */
+    letter-spacing: -0.015em !important;
   }
 
   .slide-desc {
-    font-size: 1.05rem !important; /* improved readability size */
-    line-height: 1.75 !important;
-    color: rgba(255, 255, 255, 0.75) !important; /* reduced opacity compared to heading */
-    max-width: 90% !important;
+    font-size: 1.15rem !important; /* slightly increased size */
+    line-height: 1.8 !important; /* comfortable line height */
+    color: #ffffff !important; /* pure white text */
+    opacity: 0.95 !important; /* increased paragraph opacity/contrast */
+    max-width: 320px !important; /* max paragraph width of about 320px */
     display: -webkit-box !important;
     -webkit-line-clamp: 3 !important; /* Maximum 3 lines */
     -webkit-box-orient: vertical !important;
     overflow: hidden !important;
     margin: 0 !important;
-    margin-bottom: 2.2rem !important; /* Whitespace description -> button */
+    margin-bottom: 2.5rem !important; /* Whitespace description -> button */
   }
 
   .hero-cta {
@@ -2388,6 +2408,11 @@ footer {
     gap: var(--spacing-sm);
     text-align: center;
   }
+
+  .benefits-grid {
+    grid-template-columns: repeat(2, 1fr) !important; /* Stack 2x2 on tablet/mobile */
+    gap: 1.5rem !important;
+  }
 }
 
 @media (max-width: 480px) {
@@ -2403,4 +2428,15 @@ footer {
   .gallery-item.col-span-2 {
     grid-column: span 1;
   }
+
+  .benefits-grid {
+    grid-template-columns: 1fr !important; /* Single column on narrow phones */
+    gap: 1.2rem !important;
+  }
+}
+
+html, body {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important; /* Enforce viewport confinement */
 }
