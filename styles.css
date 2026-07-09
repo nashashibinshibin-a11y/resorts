@@ -962,15 +962,44 @@ header.scrolled {
   }
 
   header .container {
-    padding: 1.5rem 24px !important;
+    padding: 2.2rem 24px 1.5rem 24px !important; /* Increased top padding slightly for notch screen buffer */
     display: flex !important;
     justify-content: space-between !important;
     align-items: center !important;
   }
 
+  header .nav-cta-wrapper {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin-left: auto !important; /* align horizontally to the center-right */
+    margin-right: 1.5rem !important; /* spacing before menu hamburger */
+  }
+
+  header .btn-nav {
+    display: inline-flex !important;
+    padding: 0.5rem 1.2rem !important;
+    font-size: 0.7rem !important;
+    letter-spacing: 0.15em !important;
+    border-radius: 50px !important;
+    height: auto !important;
+    line-height: 1 !important;
+    background-color: transparent !important;
+    border: 1px solid rgba(255, 255, 255, 0.4) !important;
+    color: var(--color-white) !important;
+    text-transform: uppercase !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
+  }
+
+  header .btn-nav:active {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(255, 255, 255, 0.8) !important;
+  }
+
   header #book-now, 
   header .nav-cta {
-    display: none !important; /* Remove Book Now CTA in header on mobile */
+    display: none !important; /* Hide old duplicate ids */
   }
 
   /* --- Immersive Mobile Background & Overlays --- */
@@ -980,8 +1009,7 @@ header.scrolled {
   }
 
   .hero-overlay {
-    background: linear-gradient(to right, rgba(42, 39, 36, 0.75) 0%, rgba(42, 39, 36, 0.25) 60%, transparent 100%),
-                linear-gradient(to top, rgba(42, 39, 36, 0.85) 0%, rgba(42, 39, 36, 0.1) 40%, transparent 100%) !important;
+    background: linear-gradient(to top, rgba(36, 34, 32, 0.75) 0%, rgba(36, 34, 32, 0.2) 50%, transparent 100%) !important; /* Soft bottom gradient only */
   }
 
   .scroll-indicator {
@@ -994,7 +1022,7 @@ header.scrolled {
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-end !important;
-    padding-bottom: 145px !important; /* Leave generous space for experience bar & swipe text */
+    padding-bottom: 22vh !important; /* shifted content upward to sit in lower-middle portion */
     padding-left: 24px !important;
     padding-right: 24px !important;
   }
@@ -1008,15 +1036,18 @@ header.scrolled {
 
   .hero-text-side {
     width: 100% !important;
-    align-items: flex-start !important;
+    align-items: flex-start !important; /* aligned perfectly left */
     text-align: left !important;
-    gap: 1.5rem !important;
+    gap: 0rem !important; /* layout gap explicitly using margins */
   }
 
   .hero-content-wrapper {
-    align-items: flex-start !important;
+    width: 100% !important;
+    align-items: flex-start !important; /* aligned perfectly left */
     text-align: left !important;
-    gap: 1rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0rem !important; /* layout gap explicitly using margins */
   }
 
   .slide-tagline {
@@ -1025,33 +1056,38 @@ header.scrolled {
     color: var(--color-gold) !important;
     text-transform: uppercase !important;
     font-weight: 600 !important;
+    margin-bottom: 1.2rem !important; /* Whitespace category label -> heading */
   }
 
   .slide-title {
-    font-size: 2.3rem !important;
+    font-size: 2.75rem !important; /* increased heading size ~20% */
     line-height: 1.25 !important;
     color: var(--color-white) !important;
     max-width: 90% !important;
     font-weight: 300 !important;
+    margin: 0 !important;
+    margin-bottom: 1.5rem !important; /* Whitespace heading -> description */
+    letter-spacing: -0.01em !important;
   }
 
   .slide-desc {
-    font-size: 0.95rem !important;
-    line-height: 1.65 !important;
-    color: rgba(255, 255, 255, 0.8) !important;
-    max-width: 95% !important;
+    font-size: 1.05rem !important; /* improved readability size */
+    line-height: 1.75 !important;
+    color: rgba(255, 255, 255, 0.75) !important; /* reduced opacity compared to heading */
+    max-width: 90% !important;
     display: -webkit-box !important;
-    -webkit-line-clamp: 3 !important;
+    -webkit-line-clamp: 3 !important; /* Maximum 3 lines */
     -webkit-box-orient: vertical !important;
     overflow: hidden !important;
     margin: 0 !important;
+    margin-bottom: 2.2rem !important; /* Whitespace description -> button */
   }
 
   .hero-cta {
     display: flex !important;
     width: 100% !important;
     justify-content: flex-start !important;
-    margin-top: 0.5rem !important;
+    margin-top: 0 !important;
   }
 
   .hero-cta .slide-btn-sub {
@@ -1061,14 +1097,27 @@ header.scrolled {
   .hero-cta .slide-btn-main {
     width: 100% !important;
     max-width: 260px !important;
-    text-align: center !important;
+    height: 56px !important; /* 56-60px height */
+    border-radius: 999px !important; /* premium pill shape */
+    background-color: #55504B !important; /* warm stone filled */
+    border: 1px solid #55504B !important;
+    color: #FAF9F6 !important;
+    text-decoration: none !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.18em !important;
     font-size: 0.8rem !important;
-    letter-spacing: 0.15em !important;
-    text-transform: uppercase !important; /* Force uppercase button text */
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 12px !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  .hero-cta .slide-btn-main:active {
+    transform: scale(0.97) !important; /* slight scale press animation */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+    background-color: var(--color-gold) !important;
+    border-color: var(--color-gold) !important;
+    color: #242220 !important;
   }
 
   /* Hide floating preview cards and arrows on mobile */
